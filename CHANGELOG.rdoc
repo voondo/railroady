@@ -1,5 +1,12 @@
 = Changes
 
+== Version 1.1.1
+
+ - Merge in a Sinatra support.
+ - Merge in other pull requests.
+ - Switched from rspec to minitest specs.
+ - Removed jeweler dependency and updated to more recent bundler + gemspec format.
+
 == Version 1.0.2
 
   - Merged in John Bintz's patch to properly strip leading "::" prefixes from class names.
