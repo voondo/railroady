@@ -4,7 +4,7 @@ RailRoady generates Rails 3/4 model (AcitveRecord, Mongoid, Datamapper) and cont
 
 Code is based on the original "railroad" gem, patched and maintained over the years. Lineage can be traced via GitHub.
 
-I (Preston Lee) am not trying to hijack Peter Hoeg or Javier's project, but rather create a dedicated, lean gem that can be used without major issue on Rails v3 projects. Rails v2 is not supported.
+I (Preston Lee) am not trying to hijack Peter Hoeg or Javier's project, but rather create a dedicated, lean gem that can be used without major issue on Rails v3 and v4 projects. Rails v2 is not supported.
 
 = System Requirements
 
@@ -134,7 +134,7 @@ also use Omnigraffle (on Mac OS X).
 
 = Rake Tasks
 
-As of Preston Lee's Rails 3 modifications, including RailRoady as a project development dependency will automatically add a set of rake tasks to your project. Sweet! (Run `rake -T` to check them out.)
+As of Preston Lee's Rails 3/4 modifications, including RailRoady as a project development dependency will automatically add a set of rake tasks to your project. Sweet! (Run `rake -T` to check them out.)
 
 
 = Requirements
@@ -143,9 +143,11 @@ RailRoady has been tested with the following Ruby and Rails versions
 
 == Ruby
 * 1.9.2+
+* 2.0.0+
 
 == Rails
 * 3.0.3+
+* 4.0.0+
 
 There are no additional requirements (nevertheless, all your Rails application
 requirements must be installed).
