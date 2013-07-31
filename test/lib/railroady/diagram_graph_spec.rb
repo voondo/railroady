@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '../../../spec_helper')
 
 module CustomDotMatchers
   class HaveDotOptions
@@ -35,15 +35,15 @@ describe DiagramGraph do
 
   describe ".dot_edge" do
     context "has_a/belongs_to" do
-      it { @diagram_graph.send(:dot_edge, "one-one", "source", "target").should have_dot_options("arrowtail=odot, arrowhead=dot, dir=both") }
+      it { @diagram_graph.send(:dot_edge, "one-one", "source", "target").must_equal have_dot_options("arrowtail=odot, arrowhead=dot, dir=both") }
     end
 
     context "has_many/belongs_to" do
-      it { @diagram_graph.send(:dot_edge, "one-many", "source", "target").should have_dot_options("arrowtail=odot, arrowhead=crow, dir=both") }
+      it { @diagram_graph.send(:dot_edge, "one-many", "source", "target").must_equal have_dot_options("arrowtail=odot, arrowhead=crow, dir=both") }
     end
 
     context "habtm" do
-      it { @diagram_graph.send(:dot_edge, "many-many", "source", "target").should have_dot_options("arrowtail=crow, arrowhead=crow, dir=both") }
+      it { @diagram_graph.send(:dot_edge, "many-many", "source", "target").must_equal have_dot_options("arrowtail=crow, arrowhead=crow, dir=both") }
     end
   end
 end
