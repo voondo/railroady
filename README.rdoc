@@ -40,7 +40,7 @@ The easiest (and recommend) usage is to include railroady as a development depen
 
     rake diagram:all
 
-This should generate four doc/*.svg files that can be opened in (most) web browsers as well as dedicate document viewers supporting the Scalable Vector Graphics format.
+This should generate four doc/*.svg files that can be opened in (most) web browsers as well as dedicated document viewers supporting the Scalable Vector Graphics format.
 
 = Alternate Usage
 
