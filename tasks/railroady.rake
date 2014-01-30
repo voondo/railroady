@@ -26,7 +26,7 @@ module RailRoady
     def self.sed
       regex = 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g'
       case RbConfig::CONFIG['host_os']
-      when /linux|cygwin/
+      when /linux|cygwin|mingw/
         return "sed -r '#{regex}'"
       when /mac|darwin|bsd/
         return "sed -E '#{regex}'"
