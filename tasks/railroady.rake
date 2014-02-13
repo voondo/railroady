@@ -40,6 +40,8 @@ end
 
 namespace :diagram do
 
+  Dir.mkdir('doc') unless File.exists?('doc')
+
   @MODELS_ALL = RailRoady::RakeHelpers.full_path("models_complete.#{RailRoady::RakeHelpers.format}").freeze
   @MODELS_BRIEF = RailRoady::RakeHelpers.full_path("models_brief.#{RailRoady::RakeHelpers.format}").freeze
   @CONTROLLERS_ALL = RailRoady::RakeHelpers.full_path("controllers_complete.#{RailRoady::RakeHelpers.format}").freeze
