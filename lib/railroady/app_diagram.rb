@@ -45,6 +45,12 @@ class AppDiagram
     load_environment
   end
 
+  def engines
+    engines = []
+    engines = Rails::Application::Railties.engines if defined?(Rails)
+    engines
+  end
+
   private 
   
   # Load Rails application's environment
