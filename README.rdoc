@@ -63,6 +63,7 @@ Common options:
     -o, --output FILE                Write diagram to file FILE
     -v, --verbose                    Enable verbose output
                                        (produce messages to STDOUT)
+        --alphabetize                Sort methods alphabetically
 
 Models diagram options:
     -a, --all                        Include all models
