@@ -49,8 +49,7 @@ class ControllersDiagram < AppDiagram
   end
   
   def extract_class_name(filename)
-    controller_index = filename.split('/').index("controllers") + 1
-    filename.split('/')[controller_index..-1].collect { |i| i.camelize }.join('::').chomp(".rb")
+    filename.match(/.*\/controllers\/(.*).rb$/)[1].camelize
   end
 
 
