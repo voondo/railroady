@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = RailRoady::VERSION
   spec.authors       = ["Preston Lee", "Tobias Crawley", "Peter Hoeg", "Javier Smaldone"]
   spec.description  = "Ruby on Rails 3/4 model and controller UML class diagram generator. Originally based on the 'railroad' plugin and contributions of many others. (`sudo port install graphviz` before use!)"
-  spec.email        = ["conmotto@gmail.com", "tcrawley@gmail.com", "peter@hoeg.com", "p.hoeg@northwind.sg", "javier@smaldone.com.ar"]
+  spec.email        = ["preston.lee@prestonlee.com", "tcrawley@gmail.com", "peter@hoeg.com", "p.hoeg@northwind.sg", "javier@smaldone.com.ar"]
   spec.summary      = "Ruby on Rails 3/4 model and controller UML class diagram generator."
   spec.homepage      = "http://github.com/preston/railroady"
   spec.license       = "GPLv2"
