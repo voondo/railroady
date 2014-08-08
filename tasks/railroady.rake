@@ -1,11 +1,11 @@
 # This suite of tasks generate graphical diagrams via code analysis.
 # A UNIX-like environment is required as well as:
-# 
+#
 # * The railroady gem. (http://github.com/preston/railroady)
 # * The graphviz package which includes the `dot` and `neato` command-line utilities. MacPorts users can install in via `sudo port install graphviz`.
 # * The `sed` command-line utility, which should already be available on all sane UNIX systems.
 #
-# Author: Preston Lee, http://railroady.prestonlee.com 
+# Author: Preston Lee, http://railroady.prestonlee.com
 
 # wrap helper methods so they don't conflict w/ methods on Object
 
@@ -40,13 +40,18 @@ end
 
 namespace :diagram do
 
-  Dir.mkdir('doc') unless File.exists?('doc')
+  @MODELS_ALL         = RailRoady::RakeHelpers.full_path("models_complete.#{RailRoady::RakeHelpers.format}").freeze
+  @MODELS_BRIEF       = RailRoady::RakeHelpers.full_path("models_brief.#{RailRoady::RakeHelpers.format}").freeze
+  @CONTROLLERS_ALL    = RailRoady::RakeHelpers.full_path("controllers_complete.#{RailRoady::RakeHelpers.format}").freeze
+  @CONTROLLERS_BRIEF  = RailRoady::RakeHelpers.full_path("controllers_brief.#{RailRoady::RakeHelpers.format}").freeze
+  @SED                = RailRoady::RakeHelpers.sed
 
-  @MODELS_ALL = RailRoady::RakeHelpers.full_path("models_complete.#{RailRoady::RakeHelpers.format}").freeze
-  @MODELS_BRIEF = RailRoady::RakeHelpers.full_path("models_brief.#{RailRoady::RakeHelpers.format}").freeze
-  @CONTROLLERS_ALL = RailRoady::RakeHelpers.full_path("controllers_complete.#{RailRoady::RakeHelpers.format}").freeze
-  @CONTROLLERS_BRIEF = RailRoady::RakeHelpers.full_path("controllers_brief.#{RailRoady::RakeHelpers.format}").freeze
-  @SED = RailRoady::RakeHelpers.sed
+  namespace :setup do
+    desc 'Perform any setup needed for the gem'
+    task :create_new_doc_folder_if_needed do
+      Dir.mkdir('doc') unless File.exists?('doc')
+    end
+  end
 
   namespace :models do
 
@@ -85,6 +90,9 @@ namespace :diagram do
   end
 
   desc 'Generates all class diagrams.'
-  task :all => ['diagram:models:complete', 'diagram:models:brief', 'diagram:controllers:complete', 'diagram:controllers:brief']
-
+  task all: ['diagram:setup:create_new_doc_folder_if_needed',
+             'diagram:models:complete',
+             'diagram:models:brief',
+             'diagram:controllers:complete',
+             'diagram:controllers:brief']
 end
