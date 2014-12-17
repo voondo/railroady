@@ -28,8 +28,9 @@ class AasmDiagram < AppDiagram
   end
 
   def get_files(prefix ='')
-    files = !@options.specify.empty? ? Dir.glob(@options.specify) : Dir.glob(prefix << "app/models/**/*.rb")
+    files = !@options.specify.empty? ? Dir.glob(@options.specify) : Dir.glob(prefix + "app/models/**/*.rb")
     files += Dir.glob("vendor/plugins/**/app/models/*.rb") if @options.plugins_models
+    files -= Dir.glob(prefix + "app/models/concerns/**/*.rb") unless @options.include_concerns
     files -= Dir.glob(@options.exclude)
     files
   end

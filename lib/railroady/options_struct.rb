@@ -27,6 +27,7 @@ class OptionsStruct < OpenStruct
                      :hide_protected => false,
                      :hide_private => false,
                      :plugins_models => false,
+		     :include_concerns => false,
                      :root => '',
                      :show_belongs_to => false,
                      :hide_through => false,
@@ -108,6 +109,9 @@ class OptionsStruct < OpenStruct
       end
       opts.on("-p", "--plugins-models", "Include plugins models") do |p|
         self.plugins_models = p
+      end
+      opts.on("--include-concerns", "Include models in concerns subdirectory") do |c|
+        self.include_concerns = c
       end
       opts.on("-t", "--transitive", "Include transitive associations",
               "(through inheritance)") do |t|
