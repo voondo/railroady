@@ -55,6 +55,9 @@ namespace :diagram do
 
   namespace :models do
 
+    desc 'Generated brief and complete class diagrams for all models.'
+    task :all => ['diagram:models:complete', 'diagram:models:brief']
+
     desc 'Generates an class diagram for all models.'
     task :complete do
       f = @MODELS_ALL
@@ -72,6 +75,9 @@ namespace :diagram do
   end
 
   namespace :controllers do
+    
+    desc 'Generated brief and complete class diagrams for all controllers.'
+    task :all => ['diagram:controllers:complete', 'diagram:controllers:brief']
 
     desc 'Generates an class diagram for all controllers.'
     task :complete do
