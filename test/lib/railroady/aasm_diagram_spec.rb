@@ -9,6 +9,13 @@ describe AasmDiagram do
       files.size.must_equal 3
     end
 
+    it 'should include concerns if specified' do
+      options = OptionsStruct.new(:include_concerns => true)
+      ad = AasmDiagram.new(options)
+      files = ad.get_files("test/file_fixture/")
+      files.size.must_equal 4
+    end
+
     it 'should exclude a specific file' do
       options = OptionsStruct.new(:exclude => ['test/file_fixture/app/models/dummy1.rb'])
       ad = AasmDiagram.new(options)
