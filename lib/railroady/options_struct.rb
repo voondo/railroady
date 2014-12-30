@@ -27,6 +27,8 @@ class OptionsStruct < OpenStruct
                      :hide_protected => false,
                      :hide_private => false,
                      :plugins_models => false,
+                     :engine_models => false,
+                     :engine_controllers => false, 
 		     :include_concerns => false,
                      :root => '',
                      :show_belongs_to => false,
@@ -110,6 +112,9 @@ class OptionsStruct < OpenStruct
       opts.on("-p", "--plugins-models", "Include plugins models") do |p|
         self.plugins_models = p
       end
+      opts.on("-z", "--engine-models", "Include engine models") do |em|
+        self.engine_models = em
+      end
       opts.on("--include-concerns", "Include models in concerns subdirectory") do |c|
         self.include_concerns = c
       end
@@ -127,6 +132,9 @@ class OptionsStruct < OpenStruct
       end
       opts.on("--hide-private", "Hide private methods") do |h|
         self.hide_private = h
+      end
+      opts.on("--engine-controllers", "Include engine controllers") do |ec|
+        self.engine_controllers = ec
       end
       opts.separator ""
       opts.separator "Other options:"

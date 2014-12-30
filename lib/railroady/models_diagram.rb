@@ -24,7 +24,7 @@ class ModelsDiagram < AppDiagram
       rescue Exception
         STDERR.puts "Warning: exception #{$!} raised while trying to load model class #{f}"
       end
-
+      
     end
   end
 
@@ -32,10 +32,21 @@ class ModelsDiagram < AppDiagram
     files = !@options.specify.empty? ? Dir.glob(@options.specify) : Dir.glob(prefix + "app/models/**/*.rb")
     files += Dir.glob("vendor/plugins/**/app/models/*.rb") if @options.plugins_models
     files -= Dir.glob(prefix + "app/models/concerns/**/*.rb") unless @options.include_concerns
+    files += get_engine_files if @options.engine_models
     files -= Dir.glob(@options.exclude)
     files
   end
 
+  def get_engine_files
+    engines.collect { |engine| Dir.glob("#{engine.root.to_s}/app/models/**/*.rb")}.flatten
+  end
+
+
+  def extract_class_name(filename)
+    filename.split('/').last.camelize.chomp(".rb")
+  end
+
+  
   # Process a model class
   def process_class(current_class)
     STDERR.puts "Processing #{current_class}" if @options.verbose
