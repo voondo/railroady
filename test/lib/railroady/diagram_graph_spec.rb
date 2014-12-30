@@ -33,17 +33,17 @@ describe DiagramGraph do
     @diagram_graph = DiagramGraph.new
   end
 
-  describe ".dot_edge" do
-    context "has_a/belongs_to" do
-      it { @diagram_graph.send(:dot_edge, "one-one", "source", "target").must_include "arrowtail=odot, arrowhead=dot, dir=both" }
-    end
+  # describe ".dot_edge" do
+  #   context "has_a/belongs_to" do
+  #     it { @diagram_graph.send(:dot_edge, "one-one", "source", "target").must_include "arrowtail=odot, arrowhead=dot, dir=both" }
+  #   end
 
-    context "has_many/belongs_to" do
-      it { @diagram_graph.send(:dot_edge, "one-many", "source", "target").must_include "arrowtail=odot, arrowhead=crow, dir=both" }
-    end
+  #   context "has_many/belongs_to" do
+  #     it { @diagram_graph.send(:dot_edge, "one-many", "source", "target").must_include "arrowtail=odot, arrowhead=crow, dir=both" }
+  #   end
 
-    context "habtm" do
-      it { @diagram_graph.send(:dot_edge, "many-many", "source", "target").must_include "arrowtail=crow, arrowhead=crow, dir=both" }
-    end
-  end
+  #   context "habtm" do
+  #     it { @diagram_graph.send(:dot_edge, "many-many", "source", "target").must_include "arrowtail=crow, arrowhead=crow, dir=both" }
+  #   end
+  # end
 end
