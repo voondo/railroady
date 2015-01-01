@@ -40,7 +40,7 @@ class DiagramGraph
   # Generate DOT graph
   def to_dot
     return dot_header +
-           @nodes.map{|n| dot_node n[0], n[1], n[2]}.join +
+           @nodes.map{|n| dot_node n[0], n[1], n[2], n[3]}.join +
            @edges.map{|e| dot_edge e[0], e[1], e[2], e[3]}.join +
            dot_footer
   end
@@ -79,7 +79,7 @@ class DiagramGraph
   end
 
   # Build a DOT graph node
-  def dot_node(type, name, attributes=nil)
+  def dot_node(type, name, attributes=nil, custom_options='')
     case type
       when 'model'
            options = 'shape=Mrecord, label="{' + name + '|'
@@ -107,6 +107,7 @@ class DiagramGraph
            # Return subgraph format
            return "subgraph cluster_#{name.downcase} {\n\tlabel = #{quote(name)}\n\t#{attributes.join("\n  ")}}"
     end # case
+    options = [options, custom_options].reject{|o| o.empty?}.join(', ')
     return "\t#{quote(name)} [#{options}]\n"
   end # dot_node
 
