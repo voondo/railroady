@@ -56,7 +56,7 @@ class DiagramGraph
   # Build DOT diagram header
   def dot_header
     result = "digraph #{@diagram_type.downcase}_diagram {\n" +
-             "\tgraph[overlap=false, splines=true]\n"
+             "\tgraph[overlap=false, splines=true, bgcolor=\"none\"]\n"
     result += dot_label if @show_label
     return result
   end
