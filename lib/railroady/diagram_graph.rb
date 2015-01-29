@@ -107,7 +107,7 @@ class DiagramGraph
            # Return subgraph format
            return "subgraph cluster_#{name.downcase} {\n\tlabel = #{quote(name)}\n\t#{attributes.join("\n  ")}}"
     end # case
-    options = [options, custom_options].reject{|o| o.empty?}.join(', ')
+    options = [options, custom_options].compact.join(', ')
     return "\t#{quote(name)} [#{options}]\n"
   end # dot_node
 
