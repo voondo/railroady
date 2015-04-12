@@ -33,7 +33,7 @@ class DiagramGraph
 
   # Generate DOT graph
   def to_dot
-    return dot_header +
+    dot_header +
            @nodes.map { |n| dot_node n[0], n[1], n[2], n[3] }.join +
            @edges.map { |e| dot_edge e[0], e[1], e[2], e[3] }.join +
            dot_footer
@@ -42,7 +42,7 @@ class DiagramGraph
   # Generate XMI diagram (not yet implemented)
   def to_xmi
      STDERR.print "Sorry. XMI output not yet implemented.\n\n"
-     return ''
+     ''
   end
 
   private
@@ -52,17 +52,17 @@ class DiagramGraph
     result = "digraph #{@diagram_type.downcase}_diagram {\n" +
              "\tgraph[overlap=false, splines=true, bgcolor=\"none\"]\n"
     result += dot_label if @show_label
-    return result
+    result
   end
 
   # Build DOT diagram footer
   def dot_footer
-    return "}\n"
+    "}\n"
   end
 
   # Build diagram label
   def dot_label
-    return "\t_diagram_info [shape=\"plaintext\", " +
+    "\t_diagram_info [shape=\"plaintext\", " +
            "label=\"#{@diagram_type} diagram\\l" +
            "Date: #{Time.now.strftime '%b %d %Y - %H:%M'}\\l" +
            (defined?(ActiveRecord::Migrator) ? 'Migration version: ' +
@@ -101,7 +101,7 @@ class DiagramGraph
            return "subgraph cluster_#{name.downcase} {\n\tlabel = #{quote(name)}\n\t#{attributes.join("\n  ")}}"
     end # case
     options = [options, custom_options].compact.join(', ')
-    return "\t#{quote(name)} [#{options}]\n"
+    "\t#{quote(name)} [#{options}]\n"
   end # dot_node
 
   # Build a DOT graph edge
@@ -121,7 +121,7 @@ class DiagramGraph
       when 'event'
            options += 'fontsize=10'
     end
-    return "\t#{quote(from)} -> #{quote(to)} [#{options}]\n"
+    "\t#{quote(from)} -> #{quote(to)} [#{options}]\n"
   end # dot_edge
 
   # Quotes a class name
