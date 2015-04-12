@@ -39,15 +39,13 @@ class AasmDiagram < AppDiagram
 
   # Load model classes
   def load_classes
-    begin
-      disable_stdout
-      get_files.each { |m| require m }
-      enable_stdout
-    rescue LoadError
-      enable_stdout
-      print_error 'model classes'
-      raise
-    end
+    disable_stdout
+    get_files.each { |m| require m }
+    enable_stdout
+  rescue LoadError
+    enable_stdout
+    print_error 'model classes'
+    raise
   end  # load_classes
 
   # Process a model class

@@ -55,17 +55,15 @@ class ControllersDiagram < AppDiagram
   private
   # Load controller classes
   def load_classes
-    begin
-      disable_stdout
-      # ApplicationController must be loaded first
-      require APP_CONTROLLER
-      get_files.each { |c| require "./#{c}" }
-      enable_stdout
-    rescue LoadError
-      enable_stdout
-      print_error 'controller classes'
-      raise
-    end
+    disable_stdout
+    # ApplicationController must be loaded first
+    require APP_CONTROLLER
+    get_files.each { |c| require "./#{c}" }
+    enable_stdout
+  rescue LoadError
+    enable_stdout
+    print_error 'controller classes'
+    raise
   end # load_classes
 
   # Proccess a controller class
