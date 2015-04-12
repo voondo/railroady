@@ -29,7 +29,7 @@ class OptionsStruct < OpenStruct
                      :plugins_models => false,
                      :engine_models => false,
                      :engine_controllers => false,
-         :include_concerns => false,
+                     :include_concerns => false,
                      :root => '',
                      :show_belongs_to => false,
                      :hide_through => false,

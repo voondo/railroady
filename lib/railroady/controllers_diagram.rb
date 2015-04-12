@@ -80,8 +80,8 @@ class ControllersDiagram < AppDiagram
     elsif current_class.is_a? Class
       # Collect controller's methods
       node_attribs = { :public    => [],
-                      :protected => [],
-                      :private   => [] }
+                       :protected => [],
+                       :private   => [] }
       current_class.public_instance_methods(false).sort.each { |m|
         node_attribs[:public] << m
       } unless @options.hide_public
