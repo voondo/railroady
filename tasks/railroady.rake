@@ -49,7 +49,7 @@ namespace :diagram do
   namespace :setup do
     desc 'Perform any setup needed for the gem'
     task :create_new_doc_folder_if_needed do
-      Dir.mkdir('doc') unless File.exists?('doc')
+      Dir.mkdir('doc') unless File.exist?('doc')
     end
   end
 
