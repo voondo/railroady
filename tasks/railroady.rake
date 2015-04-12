@@ -31,7 +31,7 @@ module RailRoady
       when /mac|darwin|bsd/
         return "sed -E '#{regex}'"
       else
-        raise NotImplementedError
+        fail NotImplementedError
       end
     end
 
