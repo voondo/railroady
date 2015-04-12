@@ -79,9 +79,9 @@ class ControllersDiagram < AppDiagram
       @graph.add_node ['controller-brief', current_class.name]
     elsif current_class.is_a? Class
       # Collect controller's methods
-      node_attribs = { :public    => [],
-                       :protected => [],
-                       :private   => [] }
+      node_attribs = { public: [],
+                       protected: [],
+                       private: [] }
       current_class.public_instance_methods(false).sort.each do |m|
         node_attribs[:public] << m
       end unless @options.hide_public
