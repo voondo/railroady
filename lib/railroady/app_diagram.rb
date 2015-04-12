@@ -104,7 +104,7 @@ class AppDiagram
     #filename.split('/')[2..-1].join('/').split('.').first.camelize
     # Fixed by patch from ticket #12742
     # File.basename(filename).chomp(".rb").camelize
-    filename.split('/')[2..-1].collect { |i| i.camelize }.join('::').chomp('.rb')
+    filename.split('/')[2..-1].collect(&:camelize).join('::').chomp('.rb')
   end
 
 end # class AppDiagram
