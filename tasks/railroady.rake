@@ -86,7 +86,6 @@ namespace :diagram do
       sh "railroady -bilamzM | #{@SED} | dot -T#{RailRoady::RakeHelpers.format} > #{f}"
     end
 
-
   end
 
   namespace :controllers do
@@ -121,7 +120,6 @@ namespace :diagram do
       puts "Generating #{f}"
       sh "railroady -bilC --engine-controllers | #{@SED} | neato -T#{RailRoady::RakeHelpers.format} > #{f}"
     end
-
 
   end
 

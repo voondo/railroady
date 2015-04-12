@@ -16,7 +16,6 @@ class AppDiagram
     @graph.alphabetize = @options.alphabetize
   end
 
-
   # Print diagram
   def print
     if @options.output
@@ -61,7 +60,6 @@ class AppDiagram
     engines
   end
 
-
   private
 
   # Load Rails application's environment
@@ -91,7 +89,6 @@ class AppDiagram
   def enable_stdout
     STDOUT.reopen(@old_stdout)
   end
-
 
   # Print error when loading Rails application
   def print_error(type)

@@ -4,7 +4,6 @@
 # Copyright 2007-2008 - Javier Smaldone (http://www.smaldone.com.ar)
 # See COPYING for more details
 
-
 # RailRoady diagram structure
 class DiagramGraph
 
@@ -29,7 +28,6 @@ class DiagramGraph
   attr_writer :show_label
 
   attr_writer :alphabetize
-
 
   # Generate DOT graph
   def to_dot

@@ -52,8 +52,6 @@ class ControllersDiagram < AppDiagram
     filename.match(/.*\/controllers\/(.*).rb$/)[1].camelize
   end
 
-
-
   private
   # Load controller classes
   def load_classes

@@ -41,11 +41,9 @@ class ModelsDiagram < AppDiagram
     engines.collect { |engine| Dir.glob("#{engine.root}/app/models/**/*.rb") }.flatten
   end
 
-
   def extract_class_name(filename)
     filename.match(/.*\/models\/(.*).rb$/)[1].camelize
   end
-
 
   # Process a model class
   def process_class(current_class)

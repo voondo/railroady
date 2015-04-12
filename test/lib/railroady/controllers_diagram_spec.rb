@@ -54,6 +54,5 @@ describe ControllersDiagram do
       end
     end
 
-
   end
 end
