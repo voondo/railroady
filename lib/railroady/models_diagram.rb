@@ -253,7 +253,7 @@ class ModelsDiagram < AppDiagram
 
     # Skip "belongs_to" associations
     macro = assoc.macro.to_s
-    return if %w[belongs_to referenced_in].include?(macro) && !@options.show_belongs_to
+    return if %w(belongs_to referenced_in).include?(macro) && !@options.show_belongs_to
 
     # Skip "through" associations
     through = assoc.options.include?(:through)
@@ -281,10 +281,10 @@ class ModelsDiagram < AppDiagram
     end
     assoc_class_name.gsub!(/^::/, '')
 
-    if %w[has_one references_one embeds_one].include?(macro)
+    if %w(has_one references_one embeds_one).include?(macro)
       assoc_type = 'one-one'
     elsif macro == 'has_many' && (!assoc.options[:through]) ||
-          %w[references_many embeds_many].include?(macro)
+          %w(references_many embeds_many).include?(macro)
       assoc_type = 'one-many'
     else # habtm or has_many, :through
       # Add FAKE associations too in order to understand mistakes
