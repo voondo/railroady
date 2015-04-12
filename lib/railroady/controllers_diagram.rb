@@ -39,12 +39,12 @@ class ControllersDiagram < AppDiagram
 
   def get_files(prefix ='')
     files = !@options.specify.empty? ? Dir.glob(@options.specify) : Dir.glob(prefix << 'app/controllers/**/*_controller.rb')
-    files += get_engine_files if @options.engine_controllers
+    files += engine_files if @options.engine_controllers
     files -= Dir.glob(@options.exclude)
     files
   end
 
-  def get_engine_files
+  def engine_files
     engines.collect { |engine| Dir.glob("#{engine.root}/app/controllers/**/*_controller.rb")}.flatten
   end
 
