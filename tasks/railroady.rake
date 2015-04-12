@@ -34,12 +34,10 @@ module RailRoady
         fail NotImplementedError
       end
     end
-
   end
 end
 
 namespace :diagram do
-
   @MODELS_ALL         = RailRoady::RakeHelpers.full_path("models_complete.#{RailRoady::RakeHelpers.format}").freeze
   @MODELS_BRIEF       = RailRoady::RakeHelpers.full_path("models_brief.#{RailRoady::RakeHelpers.format}").freeze
   @CONTROLLERS_ALL    = RailRoady::RakeHelpers.full_path("controllers_complete.#{RailRoady::RakeHelpers.format}").freeze
@@ -54,7 +52,6 @@ namespace :diagram do
   end
 
   namespace :models do
-
     desc 'Generated brief and complete class diagrams for all models.'
     task all: ['diagram:setup:create_new_doc_folder_if_needed', 'diagram:models:complete', 'diagram:models:brief']
 
@@ -85,11 +82,9 @@ namespace :diagram do
       puts "Generating #{f}"
       sh "railroady -bilamzM | #{@SED} | dot -T#{RailRoady::RakeHelpers.format} > #{f}"
     end
-
   end
 
   namespace :controllers do
-
     desc 'Generated brief and complete class diagrams for all controllers.'
     task all: ['diagram:setup:create_new_doc_folder_if_needed', 'diagram:controllers:complete', 'diagram:controllers:brief']
 
@@ -120,7 +115,6 @@ namespace :diagram do
       puts "Generating #{f}"
       sh "railroady -bilC --engine-controllers | #{@SED} | neato -T#{RailRoady::RakeHelpers.format} > #{f}"
     end
-
   end
 
   desc 'Generates all class diagrams.'
@@ -140,5 +134,4 @@ namespace :diagram do
     'diagram:controllers:complete_with_engines',
     'diagram:controllers:brief_with_engines'
   ]
-
 end

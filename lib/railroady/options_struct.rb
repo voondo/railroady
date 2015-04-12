@@ -8,7 +8,6 @@ require 'ostruct'
 
 # RailRoady command line options parser
 class OptionsStruct < OpenStruct
-
   require 'optparse'
 
   def initialize(args = {})
@@ -202,5 +201,4 @@ class OptionsStruct < OpenStruct
     STDERR.print "Error: #{msg}\n\n #{@opt_parser}\n"
     exit 1
   end
-
 end  # class OptionsStruct

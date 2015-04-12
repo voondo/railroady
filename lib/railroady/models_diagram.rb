@@ -24,7 +24,6 @@ class ModelsDiagram < AppDiagram
       rescue Exception
         STDERR.puts "Warning: exception #{$ERROR_INFO} raised while trying to load model class #{f}"
       end
-
     end
   end
 
@@ -67,7 +66,6 @@ class ModelsDiagram < AppDiagram
     if @options.inheritance && generated && include_inheritance?(current_class)
       @graph.add_edge ['is-a', current_class.superclass.name, current_class.name]
     end
-
   end # process_class
 
   def include_inheritance?(current_class)
@@ -332,5 +330,4 @@ class ModelsDiagram < AppDiagram
 
     @graph.add_edge [rel_type, class_name, assoc_class_name, assoc_name]
   end
-
 end # class ModelsDiagram

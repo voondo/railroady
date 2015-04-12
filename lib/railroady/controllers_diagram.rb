@@ -8,7 +8,6 @@ require 'railroady/app_diagram'
 
 # RailRoady controllers diagram
 class ControllersDiagram < AppDiagram
-
   # as of Rails 2.3 the file is no longer application.rb but instead
   # application_controller.rb
   APP_CONTROLLER = File.exist?('app/controllers/application.rb') ? 'app/controllers/application.rb' : 'app/controllers/application_controller.rb'
@@ -53,6 +52,7 @@ class ControllersDiagram < AppDiagram
   end
 
   private
+
   # Load controller classes
   def load_classes
     disable_stdout
@@ -68,7 +68,6 @@ class ControllersDiagram < AppDiagram
 
   # Proccess a controller class
   def process_class(current_class)
-
     STDERR.print "\tProcessing #{current_class}\n" if @options.verbose
 
     if @options.brief
@@ -101,5 +100,4 @@ class ControllersDiagram < AppDiagram
   def transitive_subclasses_of(klass)
     klass.subclasses | klass.subclasses.map { |subklass| transitive_subclasses_of(subklass) }.flatten
   end
-
 end # class ControllersDiagram

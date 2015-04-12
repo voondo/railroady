@@ -2,7 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + '../../../spec_helper')
 
 describe ModelsDiagram do
   describe 'file  processing' do
-
     it 'should select all the files under the models dir' do
       md = ModelsDiagram.new
       files = md.get_files('test/file_fixture/')
@@ -60,6 +59,5 @@ describe ModelsDiagram do
         md.get_files.must_include('test/file_fixture/lib/app/models/dummy1.rb')
       end
     end
-
   end
 end

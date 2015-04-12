@@ -2,7 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + '../../../spec_helper')
 
 describe ControllersDiagram do
   describe 'file processing' do
-
     it 'should select all the files under the controllers dir' do
       cd = ControllersDiagram.new
       files = cd.get_files('test/file_fixture/')
@@ -53,6 +52,5 @@ describe ControllersDiagram do
         md.get_files.must_include('test/file_fixture/lib/app/controllers/dummy/dummy_controller.rb')
       end
     end
-
   end
 end

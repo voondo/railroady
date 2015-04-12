@@ -6,7 +6,6 @@
 
 # RailRoady diagram structure
 class DiagramGraph
-
   def initialize
     @diagram_type = ''
     @show_label   = false
@@ -126,5 +125,4 @@ class DiagramGraph
   def quote(name)
     '"' + name.to_s + '"'
   end
-
 end # class DiagramGraph

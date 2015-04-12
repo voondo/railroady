@@ -8,7 +8,6 @@ require 'railroady/diagram_graph'
 
 # Root class for RailRoady diagrams
 class AppDiagram
-
   def initialize(options = OptionsStruct.new)
     @options = options
     @graph = DiagramGraph.new
@@ -101,5 +100,4 @@ class AppDiagram
     # File.basename(filename).chomp(".rb").camelize
     filename.split('/')[2..-1].collect(&:camelize).join('::').chomp('.rb')
   end
-
 end # class AppDiagram

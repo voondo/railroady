@@ -2,7 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + '../../../spec_helper')
 
 describe AasmDiagram do
   describe 'file processing' do
-
     it 'should select all the files under the models dir' do
       ad = AasmDiagram.new
       files = ad.get_files('test/file_fixture/')
@@ -51,6 +50,5 @@ describe AasmDiagram do
       files = ad.get_files('test/file_fixture/')
       files.size.must_equal 1
     end
-
   end
 end

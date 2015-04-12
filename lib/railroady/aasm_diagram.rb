@@ -10,7 +10,6 @@ require 'railroady/app_diagram'
 
 # Diagram for Acts As State Machine
 class AasmDiagram < AppDiagram
-
   def initialize(options = OptionsStruct.new)
     # options.exclude.map! {|e| e = "app/models/" + e}
     super options
@@ -50,7 +49,6 @@ class AasmDiagram < AppDiagram
 
   # Process a model class
   def process_class(current_class)
-
     STDERR.print "\tProcessing #{current_class}\n" if @options.verbose
 
     # Only interested in acts_as_state_machine models.
@@ -104,5 +102,4 @@ class AasmDiagram < AppDiagram
       end
     end
   end
-
 end # class AasmDiagram
