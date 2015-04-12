@@ -24,17 +24,11 @@ class DiagramGraph
     @edges << edge
   end
 
-  def diagram_type= (type)
-    @diagram_type = type
-  end
+  attr_writer :diagram_type
 
-  def show_label= (value)
-    @show_label = value
-  end
+  attr_writer :show_label
 
-  def alphabetize= (flag)
-    @alphabetize = flag
-  end
+  attr_writer :alphabetize
 
 
   # Generate DOT graph
