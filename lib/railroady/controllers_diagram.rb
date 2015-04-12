@@ -45,7 +45,7 @@ class ControllersDiagram < AppDiagram
   end
 
   def get_engine_files
-    engines.collect { |engine| Dir.glob("#{engine.root.to_s}/app/controllers/**/*_controller.rb")}.flatten
+    engines.collect { |engine| Dir.glob("#{engine.root}/app/controllers/**/*_controller.rb")}.flatten
   end
 
   def extract_class_name(filename)

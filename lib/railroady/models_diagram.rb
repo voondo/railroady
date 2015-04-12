@@ -38,7 +38,7 @@ class ModelsDiagram < AppDiagram
   end
 
   def get_engine_files
-    engines.collect { |engine| Dir.glob("#{engine.root.to_s}/app/models/**/*.rb")}.flatten
+    engines.collect { |engine| Dir.glob("#{engine.root}/app/models/**/*.rb")}.flatten
   end
 
 
@@ -251,7 +251,7 @@ class ModelsDiagram < AppDiagram
 
   # Process a model association
   def process_association(class_name, assoc)
-    STDERR.puts "- Processing model association #{assoc.name.to_s}" if @options.verbose
+    STDERR.puts "- Processing model association #{assoc.name}" if @options.verbose
 
     # Skip "belongs_to" associations
     macro = assoc.macro.to_s
@@ -301,7 +301,7 @@ class ModelsDiagram < AppDiagram
 
   # Process a DataMapper relationship
   def process_datamapper_relationship(class_name, relation)
-    STDERR.puts "- Processing DataMapper model relationship #{relation.name.to_s}" if @options.verbose
+    STDERR.puts "- Processing DataMapper model relationship #{relation.name}" if @options.verbose
 
     # Skip "belongs_to" relationships
     dm_type = relation.class.to_s.split('::')[-2]
