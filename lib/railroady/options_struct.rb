@@ -155,7 +155,7 @@ class OptionsStruct < OpenStruct
         end
       end
       opts.separator 'Commands (you must supply one of these):'
-      opts.on('-M', '--models', 'Generate models diagram') do |c|
+      opts.on('-M', '--models', 'Generate models diagram') do |_c|
         if self.command != ''
           STDERR.print "Error: Can only generate one diagram type\n\n"
           exit 1
@@ -163,7 +163,7 @@ class OptionsStruct < OpenStruct
           self.command = 'models'
         end
       end
-      opts.on('-C', '--controllers', 'Generate controllers diagram') do |c|
+      opts.on('-C', '--controllers', 'Generate controllers diagram') do |_c|
         if self.command != ''
           STDERR.print "Error: Can only generate one diagram type\n\n"
           exit 1
@@ -172,7 +172,7 @@ class OptionsStruct < OpenStruct
         end
       end
       # From Ana Nelson's patch
-      opts.on('-A', '--aasm', "Generate \"acts as state machine\" diagram") do |c|
+      opts.on('-A', '--aasm', "Generate \"acts as state machine\" diagram") do |_c|
         if self.command == 'controllers'
           STDERR.print "Error: Can only generate one diagram type\n\n"
           exit 1
