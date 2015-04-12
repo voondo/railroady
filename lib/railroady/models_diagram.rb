@@ -281,7 +281,7 @@ class ModelsDiagram < AppDiagram
     if class_name.include?('::') && !assoc_class_name.include?('::')
       assoc_class_name = class_name.split('::')[0..-2].push(assoc_class_name).join('::')
     end
-    assoc_class_name.gsub!(%r{^::}, '')
+    assoc_class_name.gsub!(/^::/, '')
 
     if %w[has_one references_one embeds_one].include?(macro)
       assoc_type = 'one-one'

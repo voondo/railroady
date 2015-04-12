@@ -45,7 +45,7 @@ class OptionsStruct < OpenStruct
 
   def parse(args)
     @opt_parser = OptionParser.new do |opts|
-      opts.banner = "Usage: #{self.app_name} [options] command"
+      opts.banner = "Usage: #{app_name} [options] command"
       opts.separator ''
       opts.separator 'Common options:'
       opts.on('-b', '--brief', 'Generate compact diagram',
@@ -143,8 +143,8 @@ class OptionsStruct < OpenStruct
         exit
       end
       opts.on('--version', 'Show version and copyright') do
-        STDOUT.print "#{self.app_human_name} version #{self.app_version}\n\n" +
-                     "#{self.copyright}\nThis is free software; see the source " +
+        STDOUT.print "#{app_human_name} version #{app_version}\n\n" +
+                     "#{copyright}\nThis is free software; see the source " +
                      "for copying conditions.\n\n"
         exit
       end
@@ -156,7 +156,7 @@ class OptionsStruct < OpenStruct
       end
       opts.separator 'Commands (you must supply one of these):'
       opts.on('-M', '--models', 'Generate models diagram') do |_c|
-        if self.command != ''
+        if command != ''
           STDERR.print "Error: Can only generate one diagram type\n\n"
           exit 1
         else
@@ -164,7 +164,7 @@ class OptionsStruct < OpenStruct
         end
       end
       opts.on('-C', '--controllers', 'Generate controllers diagram') do |_c|
-        if self.command != ''
+        if command != ''
           STDERR.print "Error: Can only generate one diagram type\n\n"
           exit 1
         else
@@ -173,7 +173,7 @@ class OptionsStruct < OpenStruct
       end
       # From Ana Nelson's patch
       opts.on('-A', '--aasm', "Generate \"acts as state machine\" diagram") do |_c|
-        if self.command == 'controllers'
+        if command == 'controllers'
           STDERR.print "Error: Can only generate one diagram type\n\n"
           exit 1
         else
