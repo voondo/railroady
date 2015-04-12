@@ -8,7 +8,7 @@ module CustomDotMatchers
     def matches?(target)
       @target = target
       return false unless @target =~ /\[(.*)\]/
-      @options = $1
+      @options = Regexp.last_match(1)
       @options == @expected
     end
     def failure_message
