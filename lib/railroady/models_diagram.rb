@@ -336,5 +336,3 @@ class ModelsDiagram < AppDiagram
   end
 
 end # class ModelsDiagram
-
-

@@ -56,4 +56,3 @@ diagram.generate
 Dir.chdir(old_dir)
 
 diagram.print
-
