@@ -318,7 +318,7 @@ class ModelsDiagram < AppDiagram
 
     # Only non standard association names needs a label
     assoc_name = ''
-    if !(relation.name.to_s.singularize.camelize.eql?(assoc_class_name.split('::').last))
+    unless relation.name.to_s.singularize.camelize.eql?(assoc_class_name.split('::').last)
       assoc_name = relation.name.to_s
     end
 
