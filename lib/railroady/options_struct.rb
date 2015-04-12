@@ -143,16 +143,14 @@ class OptionsStruct < OpenStruct
         exit
       end
       opts.on('--version', 'Show version and copyright') do
-        STDOUT.print "#{app_human_name} version #{app_version}\n\n" +
-                     "#{copyright}\nThis is free software; see the source " +
+        STDOUT.print "#{app_human_name} version #{app_version}\n\n" \
+                     "#{copyright}\nThis is free software; see the source " \
                      "for copying conditions.\n\n"
         exit
       end
       opts.separator ''
       opts.on('-c', '--config FILE', 'File to load environment (defaults to config/environment)') do |c|
-        if c && c != ''
-          self.config_file = c
-        end
+        self.config_file = c if c && c != ''
       end
       opts.separator 'Commands (you must supply one of these):'
       opts.on('-M', '--models', 'Generate models diagram') do |_c|

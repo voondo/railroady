@@ -73,8 +73,8 @@ class ModelsDiagram < AppDiagram
   def include_inheritance?(current_class)
     STDERR.puts current_class.superclass if @options.verbose
     (defined?(ActiveRecord::Base) && current_class.superclass != ActiveRecord::Base) ||
-    (defined?(CouchRest::Model::Base) && current_class.superclass != CouchRest::Model::Base) ||
-    (current_class.superclass != Object)
+      (defined?(CouchRest::Model::Base) && current_class.superclass != CouchRest::Model::Base) ||
+      (current_class.superclass != Object)
   end
 
   def process_basic_class(current_class)
@@ -96,7 +96,7 @@ class ModelsDiagram < AppDiagram
       node_type = 'model'
 
       # Collect model's content columns
-      #content_columns = current_class.content_columns
+      # content_columns = current_class.content_columns
 
       if @options.hide_magic
         # From patch #13351
@@ -135,7 +135,7 @@ class ModelsDiagram < AppDiagram
 
   def process_datamapper_model(current_class)
     node_attribs = []
-    if @options.brief #|| current_class.abstract_class?
+    if @options.brief # || current_class.abstract_class?
       node_type = 'model-brief'
     else
       node_type = 'model'
@@ -202,7 +202,7 @@ class ModelsDiagram < AppDiagram
     associations = current_class.relations.values
 
     if @options.inheritance && !@options.transitive &&
-      current_class.superclass.respond_to?(:relations)
+       current_class.superclass.respond_to?(:relations)
       associations -= current_class.superclass.relations.values
     end
 
@@ -259,7 +259,7 @@ class ModelsDiagram < AppDiagram
     through = assoc.options.include?(:through)
     return if through && @options.hide_through
 
-    #TODO:
+    # TODO:
     # FAIL: assoc.methods.include?(:class_name)
     # FAIL: assoc.responds_to?(:class_name)
     assoc_class_name = assoc.class_name rescue nil

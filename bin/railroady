@@ -44,8 +44,8 @@ when 'controllers'
 when 'aasm'
   diagram = AasmDiagram.new(options)
 else
-  STDERR.print "#{APP_HUMAN_NAME} v#{APP_VERSION}\n" +
-    "Error: You must supply a command\n" +
+  STDERR.print "#{APP_HUMAN_NAME} v#{APP_VERSION}\n" \
+    "Error: You must supply a command\n" \
     "  (try #{APP_NAME} -h)\n\n"
   exit 1
 end

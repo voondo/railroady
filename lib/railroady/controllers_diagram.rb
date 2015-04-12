@@ -14,7 +14,7 @@ class ControllersDiagram < AppDiagram
   APP_CONTROLLER = File.exist?('app/controllers/application.rb') ? 'app/controllers/application.rb' : 'app/controllers/application_controller.rb'
 
   def initialize(options = OptionsStruct.new)
-    #options.exclude.map! {|e| "app/controllers/" + e}
+    # options.exclude.map! {|e| "app/controllers/" + e}
     super options
     @graph.diagram_type = 'Controllers'
   end

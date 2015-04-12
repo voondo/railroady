@@ -29,16 +29,14 @@ class AppDiagram
     end
 
     if @options.xmi
-        STDERR.print "Generating XMI diagram\n" if @options.verbose
+      STDERR.print "Generating XMI diagram\n" if @options.verbose
       STDOUT.print @graph.to_xmi
     else
-        STDERR.print "Generating DOT graph\n" if @options.verbose
-        STDOUT.print @graph.to_dot
+      STDERR.print "Generating DOT graph\n" if @options.verbose
+      STDOUT.print @graph.to_dot
     end
 
-    if @options.output
-      STDOUT.reopen(old_stdout)
-    end
+    STDOUT.reopen(old_stdout) if @options.output
   end # print
 
   def process
@@ -81,7 +79,7 @@ class AppDiagram
   # Prevents Rails application from writing to STDOUT
   def disable_stdout
     @old_stdout = STDOUT.dup
-    #via  Tomas Matousek, http://www.ruby-forum.com/topic/205887
+    # via  Tomas Matousek, http://www.ruby-forum.com/topic/205887
     STDOUT.reopen(::RUBY_PLATFORM =~ /djgpp|(cyg|ms|bcc)win|mingw/ ? 'NUL' : '/dev/null')
   end
 
@@ -92,13 +90,13 @@ class AppDiagram
 
   # Print error when loading Rails application
   def print_error(type)
-    STDERR.print "Error loading #{type}.\n  (Are you running " +
+    STDERR.print "Error loading #{type}.\n  (Are you running " \
                  "#{@options.app_name} on the aplication's root directory?)\n\n"
   end
 
   # Extract class name from filename
   def extract_class_name(filename)
-    #filename.split('/')[2..-1].join('/').split('.').first.camelize
+    # filename.split('/')[2..-1].join('/').split('.').first.camelize
     # Fixed by patch from ticket #12742
     # File.basename(filename).chomp(".rb").camelize
     filename.split('/')[2..-1].collect(&:camelize).join('::').chomp('.rb')

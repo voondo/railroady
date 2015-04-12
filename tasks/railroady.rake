@@ -125,20 +125,20 @@ namespace :diagram do
 
   desc 'Generates all class diagrams.'
   task all: [
-             'diagram:setup:create_new_doc_folder_if_needed',
-             'diagram:models:complete',
-             'diagram:models:brief',
-             'diagram:controllers:complete',
-             'diagram:controllers:brief'
-            ]
+    'diagram:setup:create_new_doc_folder_if_needed',
+    'diagram:models:complete',
+    'diagram:models:brief',
+    'diagram:controllers:complete',
+    'diagram:controllers:brief'
+  ]
 
   desc 'Generates all class diagrams including those in engines'
   task all_with_engines: [
-             'diagram:setup:create_new_doc_folder_if_needed',
-             'diagram:models:complete_with_engines',
-             'diagram:models:brief_with_engines',
-             'diagram:controllers:complete_with_engines',
-             'diagram:controllers:brief_with_engines'
-            ]
+    'diagram:setup:create_new_doc_folder_if_needed',
+    'diagram:models:complete_with_engines',
+    'diagram:models:brief_with_engines',
+    'diagram:controllers:complete_with_engines',
+    'diagram:controllers:brief_with_engines'
+  ]
 
 end

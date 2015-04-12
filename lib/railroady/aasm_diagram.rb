@@ -12,7 +12,7 @@ require 'railroady/app_diagram'
 class AasmDiagram < AppDiagram
 
   def initialize(options = OptionsStruct.new)
-    #options.exclude.map! {|e| e = "app/models/" + e}
+    # options.exclude.map! {|e| e = "app/models/" + e}
     super options
     @graph.diagram_type = 'Models'
     # Processed habtm associations
@@ -73,11 +73,11 @@ class AasmDiagram < AppDiagram
     current_class.read_inheritable_attribute(:transition_table).each do |event_name, event|
       event.each do |transition|
         @graph.add_edge [
-                         'event',
-                         current_class.name.downcase + '_' + transition.from.to_s,
-                         current_class.name.downcase + '_' + transition.to.to_s,
-                         event_name.to_s
-                        ]
+          'event',
+          current_class.name.downcase + '_' + transition.from.to_s,
+          current_class.name.downcase + '_' + transition.to.to_s,
+          event_name.to_s
+        ]
       end
     end
   end
@@ -96,11 +96,11 @@ class AasmDiagram < AppDiagram
     current_class.aasm.events.each do |event_name, event|
       event.transitions.each do |transition|
         @graph.add_edge [
-                         'event',
-                         current_class.name.downcase + '_' + transition.from.to_s,
-                         current_class.name.downcase + '_' + transition.to.to_s,
-                         event_name.to_s
-                        ]
+          'event',
+          current_class.name.downcase + '_' + transition.from.to_s,
+          current_class.name.downcase + '_' + transition.to.to_s,
+          event_name.to_s
+        ]
       end
     end
   end
