@@ -5,18 +5,22 @@ module CustomDotMatchers
     def initialize(expected)
       @expected = expected
     end
+
     def matches?(target)
       @target = target
       return false unless @target =~ /\[(.*)\]/
       @options = Regexp.last_match(1)
       @options == @expected
     end
+
     def failure_message
       "expected '#{@target.strip}' to have options '[#{@expected}]'"
     end
+
     def negative_failure_message
       "expected '#{@target.strip}' to not have options '[#{@expected}]'"
     end
+
     def description
       'have dot options'
     end
