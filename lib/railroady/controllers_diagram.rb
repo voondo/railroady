@@ -82,15 +82,15 @@ class ControllersDiagram < AppDiagram
       node_attribs = { :public    => [],
                        :protected => [],
                        :private   => [] }
-      current_class.public_instance_methods(false).sort.each { |m|
+      current_class.public_instance_methods(false).sort.each do |m|
         node_attribs[:public] << m
-      } unless @options.hide_public
-      current_class.protected_instance_methods(false).sort.each { |m|
+      end unless @options.hide_public
+      current_class.protected_instance_methods(false).sort.each do |m|
         node_attribs[:protected] << m
-      } unless @options.hide_protected
-      current_class.private_instance_methods(false).sort.each { |m|
+      end unless @options.hide_protected
+      current_class.private_instance_methods(false).sort.each do |m|
         node_attribs[:private] << m
-      } unless @options.hide_private
+      end unless @options.hide_private
       @graph.add_node ['controller', current_class.name, node_attribs]
     elsif @options.modules && current_class.is_a?(Module)
       @graph.add_node ['module', current_class.name]
