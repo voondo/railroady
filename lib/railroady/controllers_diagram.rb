@@ -38,7 +38,7 @@ class ControllersDiagram < AppDiagram
   end # generate
 
   def get_files(prefix ='')
-    files = !@options.specify.empty? ? Dir.glob(@options.specify) : Dir.glob(prefix << "app/controllers/**/*_controller.rb")
+    files = !@options.specify.empty? ? Dir.glob(@options.specify) : Dir.glob(prefix << 'app/controllers/**/*_controller.rb')
     files += get_engine_files if @options.engine_controllers
     files -= Dir.glob(@options.exclude)
     files
@@ -65,7 +65,7 @@ class ControllersDiagram < AppDiagram
       enable_stdout
     rescue LoadError
       enable_stdout
-      print_error "controller classes"
+      print_error 'controller classes'
       raise
     end
   end # load_classes

@@ -18,7 +18,7 @@ module CustomDotMatchers
       "expected '#{@target.strip}' to not have options '[#{@expected}]'"
     end
     def description
-      "have dot options"
+      'have dot options'
     end
   end
   def have_dot_options(expected)

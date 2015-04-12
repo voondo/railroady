@@ -28,9 +28,9 @@ class AasmDiagram < AppDiagram
   end
 
   def get_files(prefix ='')
-    files = !@options.specify.empty? ? Dir.glob(@options.specify) : Dir.glob(prefix + "app/models/**/*.rb")
-    files += Dir.glob("vendor/plugins/**/app/models/*.rb") if @options.plugins_models
-    files -= Dir.glob(prefix + "app/models/concerns/**/*.rb") unless @options.include_concerns
+    files = !@options.specify.empty? ? Dir.glob(@options.specify) : Dir.glob(prefix + 'app/models/**/*.rb')
+    files += Dir.glob('vendor/plugins/**/app/models/*.rb') if @options.plugins_models
+    files -= Dir.glob(prefix + 'app/models/concerns/**/*.rb') unless @options.include_concerns
     files -= Dir.glob(@options.exclude)
     files
   end
@@ -45,7 +45,7 @@ class AasmDiagram < AppDiagram
       enable_stdout
     rescue LoadError
       enable_stdout
-      print_error "model classes"
+      print_error 'model classes'
       raise
     end
   end  # load_classes
@@ -67,7 +67,7 @@ class AasmDiagram < AppDiagram
     STDERR.print "\t\tprocessing as acts_as_state_machine\n" if @options.verbose
     current_class.states.each do |state_name|
       state = current_class.read_inheritable_attribute(:states)[state_name]
-      node_shape = (current_class.initial_state === state_name) ? ", peripheries = 2" : ""
+      node_shape = (current_class.initial_state === state_name) ? ', peripheries = 2' : ''
       node_attribs << "#{current_class.name.downcase}_#{state_name} [label=#{state_name} #{node_shape}];"
     end
     @graph.add_node [node_type, current_class.name, node_attribs]
@@ -76,8 +76,8 @@ class AasmDiagram < AppDiagram
       event.each do |transition|
         @graph.add_edge [
                          'event',
-                         current_class.name.downcase + "_" + transition.from.to_s,
-                         current_class.name.downcase + "_" + transition.to.to_s,
+                         current_class.name.downcase + '_' + transition.from.to_s,
+                         current_class.name.downcase + '_' + transition.to.to_s,
                          event_name.to_s
                         ]
       end
@@ -90,7 +90,7 @@ class AasmDiagram < AppDiagram
 
     STDERR.print "\t\tprocessing as aasm\n" if @options.verbose
     current_class.aasm.states.each do |state|
-      node_shape = (current_class.aasm.initial_state === state.name) ? ", peripheries = 2" : ""
+      node_shape = (current_class.aasm.initial_state === state.name) ? ', peripheries = 2' : ''
       node_attribs << "#{current_class.name.downcase}_#{state.name} [label=#{state.name} #{node_shape}];"
     end
     @graph.add_node [node_type, current_class.name, node_attribs]
@@ -99,8 +99,8 @@ class AasmDiagram < AppDiagram
       event.transitions.each do |transition|
         @graph.add_edge [
                          'event',
-                         current_class.name.downcase + "_" + transition.from.to_s,
-                         current_class.name.downcase + "_" + transition.to.to_s,
+                         current_class.name.downcase + '_' + transition.from.to_s,
+                         current_class.name.downcase + '_' + transition.to.to_s,
                          event_name.to_s
                         ]
       end

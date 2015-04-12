@@ -74,7 +74,7 @@ class AppDiagram
       enable_stdout
     rescue LoadError
       enable_stdout
-      print_error "application environment"
+      print_error 'application environment'
       raise
     end
     STDERR.print "Loading application classes as we go\n" if @options.verbose
@@ -84,7 +84,7 @@ class AppDiagram
   def disable_stdout
     @old_stdout = STDOUT.dup
     #via  Tomas Matousek, http://www.ruby-forum.com/topic/205887
-    STDOUT.reopen(::RUBY_PLATFORM =~ /djgpp|(cyg|ms|bcc)win|mingw/? "NUL" : "/dev/null")
+    STDOUT.reopen(::RUBY_PLATFORM =~ /djgpp|(cyg|ms|bcc)win|mingw/? 'NUL' : '/dev/null')
   end
 
   # Restore STDOUT
@@ -104,7 +104,7 @@ class AppDiagram
     #filename.split('/')[2..-1].join('/').split('.').first.camelize
     # Fixed by patch from ticket #12742
     # File.basename(filename).chomp(".rb").camelize
-    filename.split('/')[2..-1].collect { |i| i.camelize }.join('::').chomp(".rb")
+    filename.split('/')[2..-1].collect { |i| i.camelize }.join('::').chomp('.rb')
   end
 
 end # class AppDiagram

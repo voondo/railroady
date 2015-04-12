@@ -17,7 +17,7 @@ class ModelsDiagram < AppDiagram
 
   # Process model files
   def generate
-    STDERR.puts "Generating models diagram" if @options.verbose
+    STDERR.puts 'Generating models diagram' if @options.verbose
     get_files.each do |f|
       begin
         process_class extract_class_name(f).constantize
@@ -29,9 +29,9 @@ class ModelsDiagram < AppDiagram
   end
 
   def get_files(prefix ='')
-    files = !@options.specify.empty? ? Dir.glob(@options.specify) : Dir.glob(prefix + "app/models/**/*.rb")
-    files += Dir.glob("vendor/plugins/**/app/models/*.rb") if @options.plugins_models
-    files -= Dir.glob(prefix + "app/models/concerns/**/*.rb") unless @options.include_concerns
+    files = !@options.specify.empty? ? Dir.glob(@options.specify) : Dir.glob(prefix + 'app/models/**/*.rb')
+    files += Dir.glob('vendor/plugins/**/app/models/*.rb') if @options.plugins_models
+    files -= Dir.glob(prefix + 'app/models/concerns/**/*.rb') unless @options.include_concerns
     files += get_engine_files if @options.engine_models
     files -= Dir.glob(@options.exclude)
     files
@@ -104,7 +104,7 @@ class ModelsDiagram < AppDiagram
         # From patch #13351
         # http://wiki.rubyonrails.org/rails/pages/MagicFieldNames
         magic_fields = %w(created_at created_on updated_at updated_on lock_version type id position parent_id lft rgt quote template)
-        magic_fields << current_class.table_name + "_count" if current_class.respond_to? 'table_name'
+        magic_fields << current_class.table_name + '_count' if current_class.respond_to? 'table_name'
         content_columns = current_class.content_columns.select {|c| ! magic_fields.include? c.name}
       else
         content_columns = current_class.columns
@@ -278,8 +278,8 @@ class ModelsDiagram < AppDiagram
     end
 
     # Patch from "alpack" to support classes in a non-root module namespace. See: http://disq.us/yxl1v
-    if class_name.include?("::") && !assoc_class_name.include?("::")
-      assoc_class_name = class_name.split("::")[0..-2].push(assoc_class_name).join("::")
+    if class_name.include?('::') && !assoc_class_name.include?('::')
+      assoc_class_name = class_name.split('::')[0..-2].push(assoc_class_name).join('::')
     end
     assoc_class_name.gsub!(%r{^::}, '')
 
