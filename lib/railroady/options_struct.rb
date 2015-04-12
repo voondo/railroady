@@ -143,7 +143,7 @@ class OptionsStruct < OpenStruct
         exit
       end
       opts.on('--version', 'Show version and copyright') do
-        STDOUT.print"#{self.app_human_name} version #{self.app_version}\n\n" +
+        STDOUT.print "#{self.app_human_name} version #{self.app_version}\n\n" +
                      "#{self.copyright}\nThis is free software; see the source " +
                      "for copying conditions.\n\n"
         exit
