@@ -103,11 +103,7 @@ class ModelsDiagram < AppDiagram
       if @options.hide_magic
         # From patch #13351
         # http://wiki.rubyonrails.org/rails/pages/MagicFieldNames
-        magic_fields = [
-          "created_at", "created_on", "updated_at", "updated_on",
-          "lock_version", "type", "id", "position", "parent_id", "lft",
-          "rgt", "quote", "template"
-        ]
+        magic_fields = %w(created_at created_on updated_at updated_on lock_version type id position parent_id lft rgt quote template)
         magic_fields << current_class.table_name + "_count" if current_class.respond_to? 'table_name'
         content_columns = current_class.content_columns.select {|c| ! magic_fields.include? c.name}
       else
@@ -153,8 +149,7 @@ class ModelsDiagram < AppDiagram
         # From patch #13351
         # http://wiki.rubyonrails.org/rails/pages/MagicFieldNames
         magic_fields =
-          ["created_at", "created_on", "updated_at", "updated_on", "lock_version", "_type", "_id",
-           "position", "parent_id", "lft", "rgt", "quote", "template"]
+          %w(created_at created_on updated_at updated_on lock_version _type _id position parent_id lft rgt quote template)
         props = props.select {|c| !magic_fields.include?(c.name.to_s) }
       end
 
@@ -192,11 +187,7 @@ class ModelsDiagram < AppDiagram
       if @options.hide_magic
         # From patch #13351
         # http://wiki.rubyonrails.org/rails/pages/MagicFieldNames
-        magic_fields = [
-          "created_at", "created_on", "updated_at", "updated_on",
-          "lock_version", "_type", "_id", "position", "parent_id", "lft",
-          "rgt", "quote", "template"
-        ]
+        magic_fields = %w(created_at created_on updated_at updated_on lock_version _type _id position parent_id lft rgt quote template)
         content_columns = content_columns.select {|c| !magic_fields.include?(c.name) }
       end
 
@@ -242,10 +233,7 @@ class ModelsDiagram < AppDiagram
       content_columns = current_class.properties
 
       if @options.hide_magic
-        magic_fields = [
-          "created_at", "updated_at",
-          "type", "_id", "_rev"
-        ]
+        magic_fields = %w(created_at updated_at type _id _rev)
         content_columns = content_columns.select {|c| !magic_fields.include?(c.name) }
       end
 
