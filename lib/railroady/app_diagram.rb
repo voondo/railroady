@@ -84,7 +84,7 @@ class AppDiagram
   def disable_stdout
     @old_stdout = STDOUT.dup
     #via  Tomas Matousek, http://www.ruby-forum.com/topic/205887
-    STDOUT.reopen(::RUBY_PLATFORM =~ /djgpp|(cyg|ms|bcc)win|mingw/? 'NUL' : '/dev/null')
+    STDOUT.reopen(::RUBY_PLATFORM =~ /djgpp|(cyg|ms|bcc)win|mingw/ ? 'NUL' : '/dev/null')
   end
 
   # Restore STDOUT

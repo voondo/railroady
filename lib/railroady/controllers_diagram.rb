@@ -37,7 +37,7 @@ class ControllersDiagram < AppDiagram
     end
   end # generate
 
-  def get_files(prefix ='')
+  def get_files(prefix = '')
     files = !@options.specify.empty? ? Dir.glob(@options.specify) : Dir.glob(prefix << 'app/controllers/**/*_controller.rb')
     files += engine_files if @options.engine_controllers
     files -= Dir.glob(@options.exclude)
@@ -45,7 +45,7 @@ class ControllersDiagram < AppDiagram
   end
 
   def engine_files
-    engines.collect { |engine| Dir.glob("#{engine.root}/app/controllers/**/*_controller.rb")}.flatten
+    engines.collect { |engine| Dir.glob("#{engine.root}/app/controllers/**/*_controller.rb") }.flatten
   end
 
   def extract_class_name(filename)
@@ -61,7 +61,7 @@ class ControllersDiagram < AppDiagram
       disable_stdout
       # ApplicationController must be loaded first
       require APP_CONTROLLER
-      get_files.each {|c| require "./#{c}" }
+      get_files.each { |c| require "./#{c}" }
       enable_stdout
     rescue LoadError
       enable_stdout
@@ -103,7 +103,7 @@ class ControllersDiagram < AppDiagram
   end # process_class
 
   def transitive_subclasses_of(klass)
-    klass.subclasses | klass.subclasses.map {|subklass| transitive_subclasses_of(subklass)}.flatten
+    klass.subclasses | klass.subclasses.map { |subklass| transitive_subclasses_of(subklass) }.flatten
   end
 
 end # class ControllersDiagram

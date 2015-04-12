@@ -27,7 +27,7 @@ class AasmDiagram < AppDiagram
     end
   end
 
-  def get_files(prefix ='')
+  def get_files(prefix = '')
     files = !@options.specify.empty? ? Dir.glob(@options.specify) : Dir.glob(prefix + 'app/models/**/*.rb')
     files += Dir.glob('vendor/plugins/**/app/models/*.rb') if @options.plugins_models
     files -= Dir.glob(prefix + 'app/models/concerns/**/*.rb') unless @options.include_concerns
@@ -41,7 +41,7 @@ class AasmDiagram < AppDiagram
   def load_classes
     begin
       disable_stdout
-      get_files.each {|m| require m }
+      get_files.each { |m| require m }
       enable_stdout
     rescue LoadError
       enable_stdout

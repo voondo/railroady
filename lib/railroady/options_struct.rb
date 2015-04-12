@@ -11,7 +11,7 @@ class OptionsStruct < OpenStruct
 
   require 'optparse'
 
-  def initialize(args={})
+  def initialize(args = {})
     init_options = { :all => false,
                      :brief => false,
                      :specify => [],
@@ -39,7 +39,7 @@ class OptionsStruct < OpenStruct
                      :xmi => false,
                      :command => '',
                      :config_file => 'config/environment',
-                     :app_name => 'railroady', :app_human_name => 'Railroady', :app_version =>'', :copyright =>'' }
+                     :app_name => 'railroady', :app_human_name => 'Railroady', :app_version => '', :copyright => '' }
     super(init_options.merge(args))
   end # initialize
 

@@ -28,7 +28,7 @@ class ModelsDiagram < AppDiagram
     end
   end
 
-  def get_files(prefix ='')
+  def get_files(prefix = '')
     files = !@options.specify.empty? ? Dir.glob(@options.specify) : Dir.glob(prefix + 'app/models/**/*.rb')
     files += Dir.glob('vendor/plugins/**/app/models/*.rb') if @options.plugins_models
     files -= Dir.glob(prefix + 'app/models/concerns/**/*.rb') unless @options.include_concerns
@@ -38,7 +38,7 @@ class ModelsDiagram < AppDiagram
   end
 
   def engine_files
-    engines.collect { |engine| Dir.glob("#{engine.root}/app/models/**/*.rb")}.flatten
+    engines.collect { |engine| Dir.glob("#{engine.root}/app/models/**/*.rb") }.flatten
   end
 
 
@@ -105,7 +105,7 @@ class ModelsDiagram < AppDiagram
         # http://wiki.rubyonrails.org/rails/pages/MagicFieldNames
         magic_fields = %w(created_at created_on updated_at updated_on lock_version type id position parent_id lft rgt quote template)
         magic_fields << current_class.table_name + '_count' if current_class.respond_to? 'table_name'
-        content_columns = current_class.content_columns.select {|c| ! magic_fields.include? c.name}
+        content_columns = current_class.content_columns.select { |c| !magic_fields.include? c.name }
       else
         content_columns = current_class.columns
       end
@@ -123,7 +123,7 @@ class ModelsDiagram < AppDiagram
     if @options.inheritance && ! @options.transitive
       superclass_associations = current_class.superclass.reflect_on_all_associations
 
-      associations = associations.select{|a| ! superclass_associations.include? a}
+      associations = associations.select { |a| !superclass_associations.include? a }
       # This doesn't works!
       # associations -= current_class.superclass.reflect_on_all_associations
     end
@@ -150,7 +150,7 @@ class ModelsDiagram < AppDiagram
         # http://wiki.rubyonrails.org/rails/pages/MagicFieldNames
         magic_fields =
           %w(created_at created_on updated_at updated_on lock_version _type _id position parent_id lft rgt quote template)
-        props = props.select {|c| !magic_fields.include?(c.name.to_s) }
+        props = props.select { |c| !magic_fields.include?(c.name.to_s) }
       end
 
       props.each do |a|
@@ -188,7 +188,7 @@ class ModelsDiagram < AppDiagram
         # From patch #13351
         # http://wiki.rubyonrails.org/rails/pages/MagicFieldNames
         magic_fields = %w(created_at created_on updated_at updated_on lock_version _type _id position parent_id lft rgt quote template)
-        content_columns = content_columns.select {|c| !magic_fields.include?(c.name) }
+        content_columns = content_columns.select { |c| !magic_fields.include?(c.name) }
       end
 
       content_columns.each do |a|
@@ -234,7 +234,7 @@ class ModelsDiagram < AppDiagram
 
       if @options.hide_magic
         magic_fields = %w(created_at updated_at type _id _rev)
-        content_columns = content_columns.select {|c| !magic_fields.include?(c.name) }
+        content_columns = content_columns.select { |c| !magic_fields.include?(c.name) }
       end
 
       content_columns.each do |a|
@@ -332,7 +332,7 @@ class ModelsDiagram < AppDiagram
       rel_type = 'one-many'
     end
 
-    @graph.add_edge [rel_type, class_name, assoc_class_name, assoc_name ]
+    @graph.add_edge [rel_type, class_name, assoc_class_name, assoc_name]
   end
 
 end # class ModelsDiagram
