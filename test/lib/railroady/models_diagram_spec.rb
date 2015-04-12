@@ -60,6 +60,6 @@ describe ModelsDiagram do
         md.get_files.must_include("test/file_fixture/lib/app/models/dummy1.rb")
       end
     end
-    
+
   end
 end

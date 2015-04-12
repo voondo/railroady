@@ -53,7 +53,7 @@ describe ControllersDiagram do
         md.get_files.must_include("test/file_fixture/lib/app/controllers/dummy/dummy_controller.rb")
       end
     end
-    
+
 
   end
 end

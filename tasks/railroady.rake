@@ -78,7 +78,7 @@ namespace :diagram do
       puts "Generating #{f}"
       sh "railroady -ilamzM | #{@SED} | dot -T#{RailRoady::RakeHelpers.format} > #{f}"
     end
-    
+
     desc 'Generates an abbreviated class diagram for all models including those in engines'
     task :brief_with_engines do
       f = @MODELS_BRIEF
@@ -90,7 +90,7 @@ namespace :diagram do
   end
 
   namespace :controllers do
-    
+
     desc 'Generated brief and complete class diagrams for all controllers.'
     task :all => ['diagram:setup:create_new_doc_folder_if_needed', 'diagram:controllers:complete', 'diagram:controllers:brief']
 
@@ -107,14 +107,14 @@ namespace :diagram do
       puts "Generating #{f}"
       sh "railroady -blC | #{@SED} | neato -T#{RailRoady::RakeHelpers.format} > #{f}"
     end
-    
+
     desc 'Generates an class diagram for all controllers including those in engines'
-    task :complete_with_engines do 
+    task :complete_with_engines do
       f = @CONTROLLERS_ALL
       puts "Generating #{f}"
       sh "railroady -ilC --engine-controllers | #{@SED} | neato -T#{RailRoady::RakeHelpers.format} > #{f}"
     end
-    
+
     desc 'Generates an abbreviated class diagram for all controllers including those in engines.'
     task :brief_with_engines do
       f = @CONTROLLERS_BRIEF
@@ -122,7 +122,7 @@ namespace :diagram do
       sh "railroady -bilC --engine-controllers | #{@SED} | neato -T#{RailRoady::RakeHelpers.format} > #{f}"
     end
 
-    
+
   end
 
   desc 'Generates all class diagrams.'

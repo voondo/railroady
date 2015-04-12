@@ -15,7 +15,7 @@ class AppDiagram
     @graph.show_label = @options.label
     @graph.alphabetize = @options.alphabetize
   end
-  
+
 
   # Print diagram
   def print
@@ -28,13 +28,13 @@ class AppDiagram
         exit 2
       end
     end
-    
-    if @options.xmi 
+
+    if @options.xmi
         STDERR.print "Generating XMI diagram\n" if @options.verbose
     	STDOUT.print @graph.to_xmi
     else
         STDERR.print "Generating DOT graph\n" if @options.verbose
-        STDOUT.print @graph.to_dot 
+        STDOUT.print @graph.to_dot
     end
 
     if @options.output
@@ -49,7 +49,7 @@ class AppDiagram
   # get all engines
   def engines
     engines = []
-    
+
     if defined?(Rails)
       engines = if Rails::Application::Railties.respond_to?(:engines)
                   Rails::Application::Railties.engines
@@ -62,8 +62,8 @@ class AppDiagram
   end
 
 
-  private 
-  
+  private
+
   # Load Rails application's environment
   def load_environment
     STDERR.print "Loading application environment\n" if @options.verbose
@@ -87,7 +87,7 @@ class AppDiagram
     STDOUT.reopen(::RUBY_PLATFORM =~ /djgpp|(cyg|ms|bcc)win|mingw/? "NUL" : "/dev/null")
   end
 
-  # Restore STDOUT  
+  # Restore STDOUT
   def enable_stdout
     STDOUT.reopen(@old_stdout)
   end

@@ -24,7 +24,7 @@ class ModelsDiagram < AppDiagram
       rescue Exception
         STDERR.puts "Warning: exception #{$!} raised while trying to load model class #{f}"
       end
-      
+
     end
   end
 
@@ -46,7 +46,7 @@ class ModelsDiagram < AppDiagram
     filename.match(/.*\/models\/(.*).rb$/)[1].camelize
   end
 
-  
+
   # Process a model class
   def process_class(current_class)
     STDERR.puts "Processing #{current_class}" if @options.verbose

@@ -8,7 +8,7 @@ require 'railroady/app_diagram'
 
 # RailRoady controllers diagram
 class ControllersDiagram < AppDiagram
- 
+
   # as of Rails 2.3 the file is no longer application.rb but instead
   # application_controller.rb
   APP_CONTROLLER = File.exist?('app/controllers/application.rb') ? 'app/controllers/application.rb' : 'app/controllers/application_controller.rb'
@@ -34,7 +34,7 @@ class ControllersDiagram < AppDiagram
       rescue Exception
         STDERR.print "Warning: exception #{$!} raised while trying to load controller class #{f}"
       end
-    end 
+    end
   end # generate
 
   def get_files(prefix ='')
@@ -43,17 +43,17 @@ class ControllersDiagram < AppDiagram
     files -= Dir.glob(@options.exclude)
     files
   end
-  
+
   def get_engine_files
     engines.collect { |engine| Dir.glob("#{engine.root.to_s}/app/controllers/**/*_controller.rb")}.flatten
   end
-  
+
   def extract_class_name(filename)
     filename.match(/.*\/controllers\/(.*).rb$/)[1].camelize
   end
 
 
-  
+
   private
   # Load controller classes
   def load_classes
@@ -77,10 +77,10 @@ class ControllersDiagram < AppDiagram
 
     if @options.brief
       @graph.add_node ['controller-brief', current_class.name]
-    elsif current_class.is_a? Class 
+    elsif current_class.is_a? Class
       # Collect controller's methods
-      node_attribs = {:public    => [], 
-                      :protected => [], 
+      node_attribs = {:public    => [],
+                      :protected => [],
                       :private   => []}
       current_class.public_instance_methods(false).sort.each { |m|
         node_attribs[:public] << m
@@ -89,7 +89,7 @@ class ControllersDiagram < AppDiagram
         node_attribs[:protected] << m
       } unless @options.hide_protected
       current_class.private_instance_methods(false).sort.each { |m|
-        node_attribs[:private] << m 
+        node_attribs[:private] << m
       } unless @options.hide_private
       @graph.add_node ['controller', current_class.name, node_attribs]
     elsif @options.modules && current_class.is_a?(Module)

@@ -10,6 +10,6 @@ describe AppDiagram do
     it 'should constantize a name' do
       'String'.constantize.must_equal String
     end
-      
+
   end
 end
