@@ -17,36 +17,33 @@ class ModelsDiagram < AppDiagram
 
   # Process model files
   def generate
-    STDERR.puts "Generating models diagram" if @options.verbose
+    STDERR.puts 'Generating models diagram' if @options.verbose
     get_files.each do |f|
       begin
         process_class extract_class_name(f).constantize
       rescue Exception
-        STDERR.puts "Warning: exception #{$!} raised while trying to load model class #{f}"
+        STDERR.puts "Warning: exception #{$ERROR_INFO} raised while trying to load model class #{f}"
       end
-      
     end
   end
 
-  def get_files(prefix ='')
-    files = !@options.specify.empty? ? Dir.glob(@options.specify) : Dir.glob(prefix + "app/models/**/*.rb")
-    files += Dir.glob("vendor/plugins/**/app/models/*.rb") if @options.plugins_models
-    files -= Dir.glob(prefix + "app/models/concerns/**/*.rb") unless @options.include_concerns
-    files += get_engine_files if @options.engine_models
+  def get_files(prefix = '')
+    files = !@options.specify.empty? ? Dir.glob(@options.specify) : Dir.glob(prefix + 'app/models/**/*.rb')
+    files += Dir.glob('vendor/plugins/**/app/models/*.rb') if @options.plugins_models
+    files -= Dir.glob(prefix + 'app/models/concerns/**/*.rb') unless @options.include_concerns
+    files += engine_files if @options.engine_models
     files -= Dir.glob(@options.exclude)
     files
   end
 
-  def get_engine_files
-    engines.collect { |engine| Dir.glob("#{engine.root.to_s}/app/models/**/*.rb")}.flatten
+  def engine_files
+    engines.collect { |engine| Dir.glob("#{engine.root}/app/models/**/*.rb") }.flatten
   end
-
 
   def extract_class_name(filename)
     filename.match(/.*\/models\/(.*).rb$/)[1].camelize
   end
 
-  
   # Process a model class
   def process_class(current_class)
     STDERR.puts "Processing #{current_class}" if @options.verbose
@@ -58,7 +55,7 @@ class ModelsDiagram < AppDiagram
         process_mongoid_model(current_class)
       elsif defined?(DataMapper::Resource) && current_class.new.is_a?(DataMapper::Resource)
         process_datamapper_model(current_class)
-      elsif current_class.respond_to?'reflect_on_all_associations'
+      elsif current_class.respond_to? 'reflect_on_all_associations'
         process_active_record_model(current_class)
       elsif @options.all && (current_class.is_a? Class)
         process_basic_class(current_class)
@@ -69,14 +66,13 @@ class ModelsDiagram < AppDiagram
     if @options.inheritance && generated && include_inheritance?(current_class)
       @graph.add_edge ['is-a', current_class.superclass.name, current_class.name]
     end
-
   end # process_class
 
   def include_inheritance?(current_class)
     STDERR.puts current_class.superclass if @options.verbose
     (defined?(ActiveRecord::Base) && current_class.superclass != ActiveRecord::Base) ||
-    (defined?(CouchRest::Model::Base) && current_class.superclass != CouchRest::Model::Base) ||
-    (current_class.superclass != Object)
+      (defined?(CouchRest::Model::Base) && current_class.superclass != CouchRest::Model::Base) ||
+      (current_class.superclass != Object)
   end
 
   def process_basic_class(current_class)
@@ -98,18 +94,14 @@ class ModelsDiagram < AppDiagram
       node_type = 'model'
 
       # Collect model's content columns
-      #content_columns = current_class.content_columns
+      # content_columns = current_class.content_columns
 
       if @options.hide_magic
         # From patch #13351
         # http://wiki.rubyonrails.org/rails/pages/MagicFieldNames
-        magic_fields = [
-          "created_at", "created_on", "updated_at", "updated_on",
-          "lock_version", "type", "id", "position", "parent_id", "lft",
-          "rgt", "quote", "template"
-        ]
-        magic_fields << current_class.table_name + "_count" if current_class.respond_to? 'table_name'
-        content_columns = current_class.content_columns.select {|c| ! magic_fields.include? c.name}
+        magic_fields = %w(created_at created_on updated_at updated_on lock_version type id position parent_id lft rgt quote template)
+        magic_fields << current_class.table_name + '_count' if current_class.respond_to? 'table_name'
+        content_columns = current_class.content_columns.select { |c| !magic_fields.include? c.name }
       else
         content_columns = current_class.columns
       end
@@ -127,7 +119,7 @@ class ModelsDiagram < AppDiagram
     if @options.inheritance && ! @options.transitive
       superclass_associations = current_class.superclass.reflect_on_all_associations
 
-      associations = associations.select{|a| ! superclass_associations.include? a}
+      associations = associations.select { |a| !superclass_associations.include? a }
       # This doesn't works!
       # associations -= current_class.superclass.reflect_on_all_associations
     end
@@ -141,7 +133,7 @@ class ModelsDiagram < AppDiagram
 
   def process_datamapper_model(current_class)
     node_attribs = []
-    if @options.brief #|| current_class.abstract_class?
+    if @options.brief # || current_class.abstract_class?
       node_type = 'model-brief'
     else
       node_type = 'model'
@@ -153,9 +145,8 @@ class ModelsDiagram < AppDiagram
         # From patch #13351
         # http://wiki.rubyonrails.org/rails/pages/MagicFieldNames
         magic_fields =
-          ["created_at", "created_on", "updated_at", "updated_on", "lock_version", "_type", "_id",
-           "position", "parent_id", "lft", "rgt", "quote", "template"]
-        props = props.select {|c| !magic_fields.include?(c.name.to_s) }
+          %w(created_at created_on updated_at updated_on lock_version _type _id position parent_id lft rgt quote template)
+        props = props.select { |c| !magic_fields.include?(c.name.to_s) }
       end
 
       props.each do |a|
@@ -192,12 +183,8 @@ class ModelsDiagram < AppDiagram
       if @options.hide_magic
         # From patch #13351
         # http://wiki.rubyonrails.org/rails/pages/MagicFieldNames
-        magic_fields = [
-          "created_at", "created_on", "updated_at", "updated_on",
-          "lock_version", "_type", "_id", "position", "parent_id", "lft",
-          "rgt", "quote", "template"
-        ]
-        content_columns = content_columns.select {|c| !magic_fields.include?(c.name) }
+        magic_fields = %w(created_at created_on updated_at updated_on lock_version _type _id position parent_id lft rgt quote template)
+        content_columns = content_columns.select { |c| !magic_fields.include?(c.name) }
       end
 
       content_columns.each do |a|
@@ -213,7 +200,7 @@ class ModelsDiagram < AppDiagram
     associations = current_class.relations.values
 
     if @options.inheritance && !@options.transitive &&
-      current_class.superclass.respond_to?(:relations)
+       current_class.superclass.respond_to?(:relations)
       associations -= current_class.superclass.relations.values
     end
 
@@ -242,11 +229,8 @@ class ModelsDiagram < AppDiagram
       content_columns = current_class.properties
 
       if @options.hide_magic
-        magic_fields = [
-          "created_at", "updated_at",
-          "type", "_id", "_rev"
-        ]
-        content_columns = content_columns.select {|c| !magic_fields.include?(c.name) }
+        magic_fields = %w(created_at updated_at type _id _rev)
+        content_columns = content_columns.select { |c| !magic_fields.include?(c.name) }
       end
 
       content_columns.each do |a|
@@ -263,17 +247,17 @@ class ModelsDiagram < AppDiagram
 
   # Process a model association
   def process_association(class_name, assoc)
-    STDERR.puts "- Processing model association #{assoc.name.to_s}" if @options.verbose
+    STDERR.puts "- Processing model association #{assoc.name}" if @options.verbose
 
     # Skip "belongs_to" associations
     macro = assoc.macro.to_s
-    return if %w[belongs_to referenced_in].include?(macro) && !@options.show_belongs_to
+    return if %w(belongs_to referenced_in).include?(macro) && !@options.show_belongs_to
 
     # Skip "through" associations
     through = assoc.options.include?(:through)
     return if through && @options.hide_through
 
-    #TODO:
+    # TODO:
     # FAIL: assoc.methods.include?(:class_name)
     # FAIL: assoc.responds_to?(:class_name)
     assoc_class_name = assoc.class_name rescue nil
@@ -290,15 +274,15 @@ class ModelsDiagram < AppDiagram
     end
 
     # Patch from "alpack" to support classes in a non-root module namespace. See: http://disq.us/yxl1v
-    if class_name.include?("::") && !assoc_class_name.include?("::")
-      assoc_class_name = class_name.split("::")[0..-2].push(assoc_class_name).join("::")
+    if class_name.include?('::') && !assoc_class_name.include?('::')
+      assoc_class_name = class_name.split('::')[0..-2].push(assoc_class_name).join('::')
     end
-    assoc_class_name.gsub!(%r{^::}, '')
+    assoc_class_name.gsub!(/^::/, '')
 
-    if %w[has_one references_one embeds_one].include?(macro)
+    if %w(has_one references_one embeds_one).include?(macro)
       assoc_type = 'one-one'
     elsif macro == 'has_many' && (!assoc.options[:through]) ||
-          %w[references_many embeds_many].include?(macro)
+          %w(references_many embeds_many).include?(macro)
       assoc_type = 'one-many'
     else # habtm or has_many, :through
       # Add FAKE associations too in order to understand mistakes
@@ -313,7 +297,7 @@ class ModelsDiagram < AppDiagram
 
   # Process a DataMapper relationship
   def process_datamapper_relationship(class_name, relation)
-    STDERR.puts "- Processing DataMapper model relationship #{relation.name.to_s}" if @options.verbose
+    STDERR.puts "- Processing DataMapper model relationship #{relation.name}" if @options.verbose
 
     # Skip "belongs_to" relationships
     dm_type = relation.class.to_s.split('::')[-2]
@@ -332,7 +316,7 @@ class ModelsDiagram < AppDiagram
 
     # Only non standard association names needs a label
     assoc_name = ''
-    if !(relation.name.to_s.singularize.camelize.eql?(assoc_class_name.split('::').last))
+    unless relation.name.to_s.singularize.camelize.eql?(assoc_class_name.split('::').last)
       assoc_name = relation.name.to_s
     end
 
@@ -344,9 +328,6 @@ class ModelsDiagram < AppDiagram
       rel_type = 'one-many'
     end
 
-    @graph.add_edge [rel_type, class_name, assoc_class_name, assoc_name ]
+    @graph.add_edge [rel_type, class_name, assoc_class_name, assoc_name]
   end
-
 end # class ModelsDiagram
-
-

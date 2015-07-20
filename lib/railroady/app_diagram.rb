@@ -8,14 +8,12 @@ require 'railroady/diagram_graph'
 
 # Root class for RailRoady diagrams
 class AppDiagram
-
   def initialize(options = OptionsStruct.new)
     @options = options
     @graph = DiagramGraph.new
     @graph.show_label = @options.label
     @graph.alphabetize = @options.alphabetize
   end
-  
 
   # Print diagram
   def print
@@ -28,18 +26,16 @@ class AppDiagram
         exit 2
       end
     end
-    
-    if @options.xmi 
-        STDERR.print "Generating XMI diagram\n" if @options.verbose
-    	STDOUT.print @graph.to_xmi
+
+    if @options.xmi
+      STDERR.print "Generating XMI diagram\n" if @options.verbose
+      STDOUT.print @graph.to_xmi
     else
-        STDERR.print "Generating DOT graph\n" if @options.verbose
-        STDOUT.print @graph.to_dot 
+      STDERR.print "Generating DOT graph\n" if @options.verbose
+      STDOUT.print @graph.to_dot
     end
 
-    if @options.output
-      STDOUT.reopen(old_stdout)
-    end
+    STDOUT.reopen(old_stdout) if @options.output
   end # print
 
   def process
@@ -49,7 +45,7 @@ class AppDiagram
   # get all engines
   def engines
     engines = []
-    
+
     if defined?(Rails)
       engines = if Rails::Application::Railties.respond_to?(:engines)
                   Rails::Application::Railties.engines
@@ -61,9 +57,8 @@ class AppDiagram
     engines
   end
 
+  private
 
-  private 
-  
   # Load Rails application's environment
   def load_environment
     STDERR.print "Loading application environment\n" if @options.verbose
@@ -74,7 +69,7 @@ class AppDiagram
       enable_stdout
     rescue LoadError
       enable_stdout
-      print_error "application environment"
+      print_error 'application environment'
       raise
     end
     STDERR.print "Loading application classes as we go\n" if @options.verbose
@@ -83,28 +78,26 @@ class AppDiagram
   # Prevents Rails application from writing to STDOUT
   def disable_stdout
     @old_stdout = STDOUT.dup
-    #via  Tomas Matousek, http://www.ruby-forum.com/topic/205887
-    STDOUT.reopen(::RUBY_PLATFORM =~ /djgpp|(cyg|ms|bcc)win|mingw/? "NUL" : "/dev/null")
+    # via  Tomas Matousek, http://www.ruby-forum.com/topic/205887
+    STDOUT.reopen(::RUBY_PLATFORM =~ /djgpp|(cyg|ms|bcc)win|mingw/ ? 'NUL' : '/dev/null')
   end
 
-  # Restore STDOUT  
+  # Restore STDOUT
   def enable_stdout
     STDOUT.reopen(@old_stdout)
   end
 
-
   # Print error when loading Rails application
   def print_error(type)
-    STDERR.print "Error loading #{type}.\n  (Are you running " +
+    STDERR.print "Error loading #{type}.\n  (Are you running " \
                  "#{@options.app_name} on the aplication's root directory?)\n\n"
   end
 
   # Extract class name from filename
   def extract_class_name(filename)
-    #filename.split('/')[2..-1].join('/').split('.').first.camelize
+    # filename.split('/')[2..-1].join('/').split('.').first.camelize
     # Fixed by patch from ticket #12742
     # File.basename(filename).chomp(".rb").camelize
-    filename.split('/')[2..-1].collect { |i| i.camelize }.join('::').chomp(".rb")
+    filename.split('/')[2..-1].collect(&:camelize).join('::').chomp('.rb')
   end
-
 end # class AppDiagram

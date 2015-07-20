@@ -19,13 +19,13 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'railroady'
 
-APP_NAME       = "railroady"
-APP_HUMAN_NAME = "RailRoady"
+APP_NAME       = 'railroady'
+APP_HUMAN_NAME = 'RailRoady'
 # APP_VERSION    = [RailRoady::VERSION::MAJOR, RailRoady::VERSION::MINOR, RailRoady::VERSION::PATCH]
 APP_VERSION    = RailRoady::VERSION
-COPYRIGHT      = "Copyright (C) 2007-2008 Javier Smaldone, 2009 Peter Hoeg, 2010 Preston Lee"
+COPYRIGHT      = 'Copyright (C) 2007-2008 Javier Smaldone, 2009 Peter Hoeg, 2010 Preston Lee'
 
-options = OptionsStruct.new({:app_name => APP_NAME, :app_human_name => APP_HUMAN_NAME, :app_version =>APP_VERSION, :copyright =>COPYRIGHT})
+options = OptionsStruct.new(app_name: APP_NAME, app_human_name: APP_HUMAN_NAME, app_version: APP_VERSION, copyright: COPYRIGHT)
 
 options.parse ARGV
 
@@ -44,8 +44,8 @@ when 'controllers'
 when 'aasm'
   diagram = AasmDiagram.new(options)
 else
-  STDERR.print "#{APP_HUMAN_NAME} v#{APP_VERSION}\n" +
-    "Error: You must supply a command\n" +
+  STDERR.print "#{APP_HUMAN_NAME} v#{APP_VERSION}\n" \
+    "Error: You must supply a command\n" \
     "  (try #{APP_NAME} -h)\n\n"
   exit 1
 end
@@ -56,4 +56,3 @@ diagram.generate
 Dir.chdir(old_dir)
 
 diagram.print
-
