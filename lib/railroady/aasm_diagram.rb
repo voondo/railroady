@@ -53,7 +53,7 @@ class AasmDiagram < AppDiagram
 
     # Only interested in acts_as_state_machine models.
     process_acts_as_state_machine_class(current_class)  if current_class.respond_to?(:states)
-    process_aasm_class(current_class)  if current_class.respond_to?(:aasm_states)
+    process_aasm_class(current_class)  if current_class.respond_to?(:aasm_states) || current_class.respond_to?(:aasm)
   end # process_class
 
   def process_acts_as_state_machine_class(current_class)
@@ -91,13 +91,13 @@ class AasmDiagram < AppDiagram
     end
     @graph.add_node [node_type, current_class.name, node_attribs]
 
-    current_class.aasm.events.each do |event_name, event|
+    current_class.aasm.events.each do |event|
       event.transitions.each do |transition|
         @graph.add_edge [
           'event',
           current_class.name.downcase + '_' + transition.from.to_s,
           current_class.name.downcase + '_' + transition.to.to_s,
-          event_name.to_s
+          event.name.to_s
         ]
       end
     end
