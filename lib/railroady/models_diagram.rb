@@ -284,6 +284,8 @@ class ModelsDiagram < AppDiagram
     elsif macro == 'has_many' && (!assoc.options[:through]) ||
           %w(references_many embeds_many).include?(macro)
       assoc_type = 'one-many'
+    elsif macro == 'belongs_to'
+      assoc_type = 'belongs-to'
     else # habtm or has_many, :through
       # Add FAKE associations too in order to understand mistakes
       return if @habtm.include? [assoc_class_name, class_name, assoc_name]

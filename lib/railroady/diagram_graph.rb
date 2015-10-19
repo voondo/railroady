@@ -112,7 +112,10 @@ class DiagramGraph
       when 'one-many'
         options += 'arrowtail=odot, arrowhead=crow' + suffix
       when 'many-many'
-        options += 'arrowtail=crow, arrowhead=crow' + suffix
+        options += "arrowtail=crow, arrowhead=crow" + suffix
+      when 'belongs-to'
+           # following http://guides.rubyonrails.org/association_basics.html#the-belongs-to-association
+           options += "arrowtail=none, arrowhead=normal" + suffix
       when 'is-a'
         options += 'arrowhead="none", arrowtail="onormal"'
       when 'event'
