@@ -12,7 +12,7 @@ describe ModelsDiagram do
       options = OptionsStruct.new(include_concerns: true)
       ad = ModelsDiagram.new(options)
       files = ad.get_files('test/file_fixture/')
-      files.size.must_equal 4
+      files.size.must_equal 5
     end
 
     it 'should exclude a specific file' do
@@ -57,6 +57,42 @@ describe ModelsDiagram do
       engines = [OpenStruct.new(root: 'test/file_fixture/lib')]
       md.stub(:engines, engines) do
         md.get_files.must_include('test/file_fixture/lib/app/models/dummy1.rb')
+      end
+    end
+  end
+  
+  describe '#extract_class_name' do
+    describe 'class can be found' do
+      describe 'module without namespace' do
+        module AuthorSettings
+        end
+        
+        it 'does not take every models subdirectory as a namespace' do
+          md = ModelsDiagram.new(OptionsStruct.new)
+          
+          md.extract_class_name('test/file_fixture/app/models/concerns/author_settings.rb').must_equal 'AuthorSettings'
+        end
+      end
+      
+      describe 'module with parent namespace / class' do
+        class User
+          module Authentication
+          end
+        end
+        
+        it 'does not take every models subdirectory as a namespace' do
+          md = ModelsDiagram.new(OptionsStruct.new)
+          
+          md.extract_class_name('test/file_fixture/app/models/concerns/user/authentication.rb').must_equal 'User::Authentication'
+        end
+      end
+    end
+    
+    describe 'class cannot be found' do
+      it 'returns the full class name' do
+        md = ModelsDiagram.new(OptionsStruct.new)
+        
+        md.extract_class_name('test/file_fixture/app/models/concerns/dummy.rb').must_equal 'Concerns::Dummy'
       end
     end
   end

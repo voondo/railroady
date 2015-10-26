@@ -39,9 +39,31 @@ class ModelsDiagram < AppDiagram
   def engine_files
     engines.collect { |engine| Dir.glob("#{engine.root}/app/models/**/*.rb") }.flatten
   end
-
+  
   def extract_class_name(filename)
-    filename.match(/.*\/models\/(.*).rb$/)[1].camelize
+    filename_was, class_name = filename, nil
+      
+    filename = "app/models/#{filename.split('app/models')[1]}"   
+      
+    while filename.split('/').length > 2
+      begin
+        class_name = filename.match(/.*\/models\/(.*).rb$/)[1].camelize
+        class_name.constantize
+        
+        break
+      rescue Exception => e
+        class_name = nil
+        filename_end = filename.split('/')[2..-1]
+        filename_end.shift
+        filename = "#{filename.split('/')[0, 2].join('/')}/#{filename_end.join('/')}"
+      end
+    end
+    
+    if class_name.nil?
+      filename_was.match(/.*\/models\/(.*).rb$/)[1].camelize
+    else
+      class_name
+    end
   end
 
   # Process a model class
