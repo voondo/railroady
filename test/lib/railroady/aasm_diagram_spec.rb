@@ -12,7 +12,7 @@ describe AasmDiagram do
       options = OptionsStruct.new(include_concerns: true)
       ad = AasmDiagram.new(options)
       files = ad.get_files('test/file_fixture/')
-      files.size.must_equal 4
+      files.size.must_equal 5
     end
 
     it 'should exclude a specific file' do
