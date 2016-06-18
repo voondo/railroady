@@ -92,8 +92,8 @@ class ModelsDiagram < AppDiagram
 
   def include_inheritance?(current_class)
     STDERR.puts current_class.superclass if @options.verbose
-    (defined?(ActiveRecord::Base) && current_class.superclass != ActiveRecord::Base) ||
-      (defined?(CouchRest::Model::Base) && current_class.superclass != CouchRest::Model::Base) ||
+    (defined?(ActiveRecord::Base) ? current_class.superclass != ActiveRecord::Base : true) &&
+      (defined?(CouchRest::Model::Base) ? current_class.superclass != CouchRest::Model::Base : true) &&
       (current_class.superclass != Object)
   end
 

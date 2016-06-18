@@ -96,4 +96,67 @@ describe ModelsDiagram do
       end
     end
   end
+
+  describe '#include_inheritance?' do
+    after do
+      Object.send(:remove_const, :Child)
+    end
+    describe 'when class inherits from another app class' do
+      before do
+        class Parent; end;
+        class Child < Parent; end;
+      end
+      it 'returns true' do
+        md = ModelsDiagram.new(OptionsStruct.new)
+        md.include_inheritance?(Child).must_equal true
+      end
+      after do
+        Object.send(:remove_const, :Parent)
+      end
+    end
+
+    describe 'when class inherits from Object' do
+      before do
+        class Child < Object; end;
+      end
+      it 'returns false' do
+        md = ModelsDiagram.new(OptionsStruct.new)
+        md.include_inheritance?(Child).must_equal false
+      end
+    end
+
+    describe 'when class inherits from ActiveRecord::Base' do
+      before do
+        module ActiveRecord
+          class Base; end;
+        end
+        class Child < ActiveRecord::Base; end;
+      end
+      it 'returns false' do
+        md = ModelsDiagram.new(OptionsStruct.new)
+        md.include_inheritance?(Child).must_equal false
+      end
+      after do
+        Object.send(:remove_const, :ActiveRecord)
+      end
+    end
+
+    describe 'when class inherits from CouchRest::Model::Base' do
+      before do
+        module CouchRest
+          module Model
+            class Base; end;
+          end
+        end
+        class Child < CouchRest::Model::Base; end;
+      end
+      it 'returns false' do
+        md = ModelsDiagram.new(OptionsStruct.new)
+        md.include_inheritance?(Child).must_equal false
+      end
+      after do
+        Object.send(:remove_const, :CouchRest)
+      end
+    end
+  end
 end
