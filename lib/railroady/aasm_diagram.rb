@@ -62,7 +62,7 @@ class AasmDiagram < AppDiagram
 
     STDERR.print "\t\tprocessing as acts_as_state_machine\n" if @options.verbose
     current_class.states.each do |state_name|
-      state = current_class.read_inheritable_attribute(:states)[state_name]
+    #   state = current_class.read_inheritable_attribute(:states)[state_name]
       node_shape = (current_class.initial_state == state_name) ? ', peripheries = 2' : ''
       node_attribs << "#{current_class.name.downcase}_#{state_name} [label=#{state_name} #{node_shape}];"
     end
