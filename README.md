@@ -201,4 +201,20 @@ See LICENSE for details.
 
 ## Authors
 
-See AUTHORS for details.
+Authors/Contributors (in approximate order of appearance):
+
+* Javier Smaldone (javier |at| smaldone |dot| com |dot| ar)
+* Elliot Smith
+* Juan Ignacio Pumarino
+* Hajime Baba
+* Ana Nelson
+* Peter Hoeg
+* John McCaffrey
+* David Jones
+* Mike Dalessio
+* [Preston Lee](https://www.prestonlee.com) and [Lee Does](https://www.leedoes.com), the vendor providing maintenance.
+* Tim Harvey
+* Atli Christiansen
+* John Bintz (http://www.coswellproductions.com/)
+
+And of course, many thanks to the many patch submitters and testers that make this possible!
