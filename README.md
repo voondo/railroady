@@ -1,5 +1,7 @@
 # RailRoady
 
+[![Build Status](https://travis-ci.org/preston/railroady.svg?branch=master)](https://travis-ci.org/preston/railroady)
+
 RailRoady generates Rails 3/4 model (ActiveRecord, Mongoid, Datamapper) and controller UML diagrams as cross-platform .svg files, as well as in the DOT language.
 
 Code is based on the original "railroad" gem, patched and maintained over the years. Lineage can be traced via GitHub.
@@ -73,7 +75,7 @@ Alternatively, you may run the 'railroady' command-line program at the Rails app
       	-x, --xmi                        Produce XMI instead of DOT
                                          (for UML tools)
         --alphabetize                Sort methods alphabetically
-			
+
   	Models diagram options:
       	-a, --all                        Include all models
                                          (not only ActiveRecord::Base derived)
@@ -89,17 +91,17 @@ Alternatively, you may run the 'railroady' command-line program at the Rails app
           	--include-concerns           Include models in concerns subdirectory
       	-t, --transitive                 Include transitive associations
                                        	(through inheritance)
-										
+
   	Controllers diagram options:
           	--hide-public                Hide public methods
           	--hide-protected             Hide protected methods
           	--hide-private               Hide private methods
           	--engine-controllers         Include engine controllers
-			
+
   	Other options:
       	-h, --help                       Show this message
           	--version                    Show version and copyright
-			
+
       	-c, --config FILE                File to load environment (defaults to config/environment)
 
 ## Commands
