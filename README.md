@@ -2,11 +2,11 @@
 
 [![Build Status](https://travis-ci.org/preston/railroady.svg?branch=master)](https://travis-ci.org/preston/railroady)
 
-RailRoady generates Rails 3/4 model (ActiveRecord, Mongoid, Datamapper) and controller UML diagrams as cross-platform .svg files, as well as in the DOT language.
+RailRoady generates Rails 3/4/5 model (ActiveRecord, Mongoid, Datamapper) and controller UML diagrams as cross-platform .svg files, as well as in the DOT language.
 
 Code is based on the original "railroad" gem, patched and maintained over the years. Lineage can be traced via GitHub.
 
-I (Preston Lee) am not trying to hijack Peter Hoeg or Javier's project, but rather create a dedicated, lean gem that can be used without major issue on Rails v3 and v4 projects. Rails v2 is not supported.
+I (Preston Lee) am not trying to hijack Peter Hoeg or Javier's project, but rather create a dedicated, lean gem that can be used without major issue on Rails projects. Rails v2 is not supported.
 
 # System Requirements
 
@@ -158,7 +158,7 @@ also use Omnigraffle (on Mac OS X).
 
 = Rake Tasks
 
-As of Preston Lee's Rails 3/4 modifications, including RailRoady as a project development dependency will automatically add a set of rake tasks to your project. Sweet! (Run `rake -T` to check them out.)
+As of Preston Lee's Rails 3/4/5 modifications, including RailRoady as a project development dependency will automatically add a set of rake tasks to your project. Sweet! (Run `rake -T` to check them out.)
 
 
 # Requirements
@@ -172,6 +172,7 @@ RailRoady has been tested with the following Ruby and Rails versions
 ## Rails
 * 3.0.3+
 * 4.0.0+
+* 5.0.0+
 
 There are no additional requirements (nevertheless, all your Rails application
 requirements must be installed).
@@ -195,7 +196,7 @@ See LICENSE for details.
 
 Copyright (c) 2007-2008 Javier Smaldone
 Copyright (c) 2009 Peter Hoeg
-Copyright (c) 2010 Preston Lee
+Copyright (c) 2010-2016 Preston Lee
 
 See LICENSE for details.
 
