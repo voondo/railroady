@@ -51,7 +51,7 @@ class ModelsDiagram < AppDiagram
         class_name.constantize
 
         break
-	rescue Exception # => e
+      rescue Exception
         class_name = nil
         filename_end = filename.split('/')[2..-1]
         filename_end.shift
