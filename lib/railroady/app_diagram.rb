@@ -90,7 +90,7 @@ class AppDiagram
   # Print error when loading Rails application
   def print_error(type)
     STDERR.print "Error loading #{type}.\n  (Are you running " \
-                 "#{@options.app_name} on the aplication's root directory?)\n\n"
+                 "#{@options.app_name} on the application's root directory?)\n\n"
   end
 
   # Extract class name from filename
