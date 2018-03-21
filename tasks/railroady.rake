@@ -54,7 +54,7 @@ namespace :diagram do
   end
 
   namespace :models do
-    desc 'Generated brief and complete class diagrams for all models.'
+    desc 'Generates brief and complete class diagrams for all models.'
     task all: ['diagram:setup:create_new_doc_folder_if_needed', 'diagram:models:complete', 'diagram:models:brief']
 
     desc 'Generates a class diagram for all models.'
@@ -87,7 +87,7 @@ namespace :diagram do
   end
 
   namespace :controllers do
-    desc 'Generated brief and complete class diagrams for all controllers.'
+    desc 'Generates brief and complete class diagrams for all controllers.'
     task all: ['diagram:setup:create_new_doc_folder_if_needed', 'diagram:controllers:complete', 'diagram:controllers:brief']
 
     desc 'Generates a class diagram for all controllers.'
