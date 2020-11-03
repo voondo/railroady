@@ -290,13 +290,7 @@ class ModelsDiagram < AppDiagram
 
     # Only non standard association names needs a label
 
-    # from patch #12384
-    # if assoc.class_name == assoc.name.to_s.singularize.camelize
-    if assoc_class_name == assoc.name.to_s.singularize.camelize
-      assoc_name = ''
-    else
-      assoc_name = assoc.name.to_s
-    end
+    assoc_name = assoc.name.to_s
 
     # Patch from "alpack" to support classes in a non-root module namespace. See: http://disq.us/yxl1v
     if class_name.include?('::') && !assoc_class_name.include?('::')
